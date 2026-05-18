@@ -406,6 +406,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
 }
 .summary-text .brief-para{
   margin:0 0 var(--s-md);
+  display:block;
 }
 .summary-text .brief-para:last-child{
   margin-bottom:0;
@@ -3970,12 +3971,12 @@ function render() {
   var aboveFold = _paras.slice(0, ABOVE_FOLD);
   var belowFold = _paras.slice(ABOVE_FOLD);
   html += aboveFold.map(function(p){
-    return '<p class="brief-para">'+ _maybeBullet(p) +'</p>';
+    return '<div class="brief-para">'+ _maybeBullet(p) +'</div>';
   }).join('');
   if (belowFold.length) {
     html += '<details class="brief-more"><summary>Read the rest ('+ belowFold.length +' more paragraph'+ (belowFold.length>1?'s':'') +')</summary>';
     html += belowFold.map(function(p){
-      return '<p class="brief-para">'+ _maybeBullet(p) +'</p>';
+      return '<div class="brief-para">'+ _maybeBullet(p) +'</div>';
     }).join('');
     html += '</details>';
   }
@@ -4364,6 +4365,45 @@ function render() {
 }
 
 function excoH(tag, cls, content) { return '<'+tag+(cls?' class="'+cls+'"':'')+'>'+content+'</'+tag+'>'; }
+var _ACRO = new Set([
+    'US','UK','EU','UAE','USA','KSA','GCC','NATO','OPEC','OPEC+','MENA','BRICS',
+    'IAEA','HEU','MOU','UNGA','UNSC','ICC','UN','NPT','NSG','CIA','NSA','DOD','DOJ','FBI',
+    'IRGC','IDF','CENTCOM','EUCOM','RAF','USAF','USCG','USN',
+    'EGP','USD','GBP','EUR','JPY','CNY','SAR','AED','QAR','KWD','OMR','BHD',
+    'NIR','CPI','GDP','FX','ECB','CBE','IMF','IFC','WB','EIB','BOJ','BOE','PBOC',
+    'AAA','LNG','HFO','UCO','BBL','BPS','UTC','GMT','EDT','EST','BST','IST','JST',
+    'AM','PM','HQ','VP','SVP','EVP','CEO','CFO','COO','CIO','CISO','CTO','CMO',
+    'API','SDK','OS','GPS','HTTP','HTTPS','URL','HTML','CSS','JSON','XML','TLS','SSL',
+    'WSJ','FT','NYT','BBC','CNN','NPR','PBS','AFP','SCMP','TASS','RIA','IRNA','MEMRI','MEES',
+    'POTUS','VPOTUS','SCOTUS','MAGA','EU27',
+    'AI','ML','IT','RD','PR','HR','QA','UX','UI','SLA','KPI','OKR',
+    'CDN','VPN','WAN','LAN','XSS','CSRF','XSRF',
+    'NO','OK','GO','YES','MAX','MIN','TBD','TBC','FYI','ETA','EOL','EOQ','EOY','YTD','QoQ','YoY','MoM','WoW',
+    'SOC','SOX','GDPR','HIPAA','PCI','PII',
+    'OEM','OEMS','MOAB','GBU','JDAM','THAAD',
+    'F-35','F-15','F-16','F-22','B-1','B-2','B-21','B-52','C-17','C-130','KC-46',
+    'CH-47','UH-60','AH-64','AC-130','MQ-9','RQ-4','MQ-1',
+    'NIE','PDB','SCIF','TS','SCI','HUMINT','SIGINT','OSINT','GEOINT','MASINT',
+    'CO2','SO2','NOx'
+]);
+function _deshout(s) {
+    if (!s) return s;
+    return s.replace(/([A-Z][A-Z0-9'\-/&]*)/g, function(word) {
+        var bare = word.replace(/[^A-Z0-9]/g, '');
+        if (bare.length <= 2) return word;
+        if (_ACRO.has(word) || _ACRO.has(bare)) return word;
+        return word.charAt(0) + word.slice(1).toLowerCase();
+    });
+}
+function _restoreAcro(s) {
+    if (!s) return s;
+    return s.replace(/\b([A-Z][a-zA-Z]*)\b/g, function(word) {
+        var up = word.toUpperCase();
+        if (_ACRO.has(up)) return up;
+        return word;
+    });
+}
+
 function excoEsc(s) { return String(s||'—').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 function excoMetric(label, value, sub, color) {
@@ -4806,7 +4846,7 @@ function renderExcoTop(D, upd) {
     var ea = D.energy_crisis_alert;
     document.getElementById('exco-energy-alert').style.display = '';
     document.getElementById('exco-energy-upd').textContent = ts(ea.updated) || upd;
-    document.getElementById('exco-energy-headline').textContent = ea.headline || '';
+    document.getElementById('exco-energy-headline').textContent = _restoreAcro(_deshout(ea.headline || ''));
     document.getElementById('exco-energy-summary').textContent = ea.summary || '';
     document.getElementById('exco-energy-measures').innerHTML = (ea.current_measures || []).map(function(m){return '<li>'+esc(m)+'</li>';}).join('');
     var br2 = ea.blackout_risk || {};
@@ -4823,7 +4863,7 @@ function renderExcoTop(D, upd) {
     var c = D.cairo_travel_briefing;
     document.getElementById('exco-cairo-briefing').style.display = '';
     document.getElementById('exco-cairo-upd').textContent = ts(c.updated) || upd;
-    document.getElementById('exco-cairo-headline').textContent = c.headline || '';
+    document.getElementById('exco-cairo-headline').textContent = _restoreAcro(_deshout(c.headline || ''));
     var ins = c.insurance_alert || {};
     document.getElementById('exco-cairo-ins-priority').textContent = ins.priority || '';
     document.getElementById('exco-cairo-ins-bottom').textContent = ins.bottom_line || '';
@@ -4967,8 +5007,8 @@ function renderExcoTop(D, upd) {
       document.getElementById('exco-review-summary').textContent = wrs.last_run_findings_summary || '';
     }
 
-    document.getElementById('exco-brf-headline').textContent = eb.headline || '';
-    document.getElementById('exco-brf-summary').textContent = eb.one_paragraph_summary || '';
+    document.getElementById('exco-brf-headline').textContent = _restoreAcro(_deshout(eb.headline || ''));
+    document.getElementById('exco-brf-summary').textContent = _restoreAcro(_deshout(eb.one_paragraph_summary || eb.summary || ''));
     document.getElementById('exco-brf-questions').innerHTML = (eb.five_key_questions_for_exco || []).map(function(q){
       var sevCls = 'exco-q-sev-'+(q.severity||'medium').replace(/[^a-z]/g,'');
       return '<div class="exco-q-card '+sevCls+'">'
