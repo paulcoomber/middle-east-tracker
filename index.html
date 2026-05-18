@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gulf & Egypt Risk Monitor — Day 52</title>
+<title id="page-title">Gulf & Egypt Risk Monitor</title>
 <script>
 /* Mobile redirect — sends phones/tablets to mobile.html unless ?desktop=1 is set. */
 (function(){
@@ -351,6 +351,24 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--m
 .exco-review-meta{color:var(--muted);font-size:11px;font-family:var(--mono)}
 .exco-review-summary{font-size:11px;color:var(--text);line-height:1.5;margin-top:6px}
 
+@media print {
+  body, html { background:#fff !important; color:#000 !important; }
+  
+  .head, .tabs, .ftr, .exco-buttons-row { display:none !important; }
+  .page:not(.active) { display:none !important; }
+  
+  .page.active { display:block !important; }
+  
+  #page-exco .card { border:none !important; padding:0 !important; background:transparent !important; }
+  #page-exco .card-title { display:none !important; }
+  #page-exco iframe {
+    width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    border:none !important;
+    page-break-inside:auto;
+  }
+}
 </style>
 </head>
 <body>
@@ -389,6 +407,21 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--m
 <div class="content">
 
 <div class="page active" id="page-brief">
+
+  <div class="card">
+    <div class="card-title">Intelligence Brief <span class="card-upd" id="brief-upd"></span></div>
+    <div class="headline" id="brief-headline">Loading…</div>
+    <div class="summary-text" id="brief-summary"></div>
+    <div class="grid3" style="margin-bottom:12px">
+      <div class="mbox"><div class="mbox-label">Ceasefire</div><div class="mbox-val red" id="brief-cf" style="font-size:13px;margin-top:4px">—</div></div>
+      <div class="mbox"><div class="mbox-label">Nuclear status</div><div class="mbox-val amber" id="brief-nuc" style="font-size:11px;margin-top:4px;line-height:1.3">—</div></div>
+      <div class="mbox"><div class="mbox-label">Ground ops</div><div class="mbox-val red" id="brief-gnd" style="font-size:11px;margin-top:4px;line-height:1.3">—</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Key Developments</div>
+    <ul class="dev-list" id="brief-devs"></ul>
+  </div>
 
   <div class="exco-top">
     <div class="card exco-critical" id="exco-energy-alert" style="display:none">
@@ -517,20 +550,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--m
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Intelligence Brief <span class="card-upd" id="brief-upd"></span></div>
-    <div class="headline" id="brief-headline">Loading…</div>
-    <div class="summary-text" id="brief-summary"></div>
-    <div class="grid3" style="margin-bottom:12px">
-      <div class="mbox"><div class="mbox-label">Ceasefire</div><div class="mbox-val red" id="brief-cf" style="font-size:13px;margin-top:4px">—</div></div>
-      <div class="mbox"><div class="mbox-label">Nuclear status</div><div class="mbox-val amber" id="brief-nuc" style="font-size:11px;margin-top:4px;line-height:1.3">—</div></div>
-      <div class="mbox"><div class="mbox-label">Ground ops</div><div class="mbox-val red" id="brief-gnd" style="font-size:11px;margin-top:4px;line-height:1.3">—</div></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">Key Developments</div>
-    <ul class="dev-list" id="brief-devs"></ul>
-  </div>
 </div>
 
 <div class="page" id="page-markets">
@@ -756,9 +775,10 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--m
 <div class="page" id="page-exco">
   <div class="card">
     <div class="card-title">Executive Summary Report <span class="card-upd" id="exco-upd"></span></div>
-    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-      <button class="exco-btn" onclick="generateExco()">Generate Report</button>
-      <button class="exco-btn" onclick="printExco()">Download report (print-ready HTML)</button>
+    <div class="exco-buttons-row" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+      <button class="exco-btn" onclick="window.print()">Print / Save as PDF</button>
+      <button class="exco-btn" onclick="printExco()">Download as HTML</button>
+      <button class="exco-btn" onclick="generateExco()" style="opacity:0.55" title="Re-render the report inline (auto-runs on data load).">Re-render</button>
     </div>
     <div id="exco-status" style="font-size:11px;color:var(--dim);margin-bottom:10px"></div>
     <div id="exco-output"></div>
@@ -2686,6 +2706,12 @@ function showTab(id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   event.currentTarget.classList.add('active');
+  if (id === 'exco') {
+    var out = document.getElementById('exco-output');
+    if (out && !out.querySelector('iframe')) {
+      try { generateExco(); } catch(e) { /* swallow */ }
+    }
+  }
 }
 
 function esc(s) {
@@ -3303,6 +3329,11 @@ function render() {
   }).join('');
 
   renderSources();
+  try { generateExco(); } catch(e) { /* exco data not ready yet, will retry on tab switch */ }
+  try {
+    var _m = (window.GULF_RISK_DATA && window.GULF_RISK_DATA._meta) || {};
+    if (_m.day !== undefined) { document.title = 'Gulf & Egypt Risk Monitor — Day ' + _m.day; }
+  } catch(e) {}
 }
 
 function excoH(tag, cls, content) { return '<'+tag+(cls?' class="'+cls+'"':'')+'>'+content+'</'+tag+'>'; }
