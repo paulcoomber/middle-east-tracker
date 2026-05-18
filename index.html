@@ -3893,6 +3893,14 @@ function render() {
       return word.charAt(0) + word.slice(1).toLowerCase();
     });
   }
+  function _restoreAcro(s) {
+    if (!s) return s;
+    return s.replace(/\b([A-Z][a-zA-Z]*)\b/g, function(word) {
+      var up = word.toUpperCase();
+      if (_ACRO.has(up)) return up;
+      return word;
+    });
+  }
 
   function _maybeBullet(p) {
     var plusCount = (p.match(/\s\+\s/g) || []).length;
@@ -3950,12 +3958,12 @@ function render() {
   }
   function _escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  var _paras = _toParagraphs(_body).map(_deshout);
+  var _paras = _toParagraphs(_body).map(function(p){return _restoreAcro(_deshout(p));});
   document.getElementById('brief-headline').textContent = _kicker || '';
 
   var html = '';
   if (_topic) {
-    var titled = _deshout(_topic.toLowerCase().replace(/\b([a-z])/g, function(_,c){return c.toUpperCase();}));
+    var titled = _restoreAcro(_topic.toLowerCase().replace(/\b([a-z])/g, function(_,c){return c.toUpperCase();}));
     html += '<h2 class="brief-topic">'+ _escHtml(titled) +'</h2>';
   }
   var ABOVE_FOLD = 3;
