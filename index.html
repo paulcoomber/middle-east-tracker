@@ -28,7 +28,7 @@
 })();
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&display=swap');
 
 *{box-sizing:border-box;margin:0;padding:0}
 
@@ -49,11 +49,22 @@
   --dim:#6b7280;
   --text:#c9d1d9;
   --bright:#f0f6fc;
-  --mono:'JetBrains Mono',monospace;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
   --sans:'Syne',sans-serif;
+  --body:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --s-xs:4px;
+  --s-sm:8px;
+  --s-md:12px;
+  --s-lg:16px;
+  --s-xl:24px;
+  --val-up-bad:#ef4444;
+  --val-up-good:#22c55e;
+  --val-dn-bad:#ef4444;
+  --val-dn-good:#22c55e;
+  --val-flat:#9ca3af;
 }
 
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--mono);font-size:13px;line-height:1.5;overflow:hidden}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--body);font-size:13.5px;line-height:1.6;overflow:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 
 .shell{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 
@@ -369,6 +380,185 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--m
     page-break-inside:auto;
   }
 }
+
+.headline{
+  font-family:var(--body);
+  font-weight:700;
+  font-size:22px;
+  letter-spacing:-0.01em;
+  line-height:1.25;
+  color:var(--bright);
+  margin-bottom:var(--s-sm);
+  max-width:78ch;
+}
+
+.summary-text{
+  font-family:var(--body);
+  font-size:13px;
+  font-weight:400;
+  color:var(--text);
+  line-height:1.7;
+  margin-top:var(--s-md);
+  padding-top:var(--s-md);
+  border-top:1px solid var(--border);
+  max-width:72ch;
+}
+
+.card-title{
+  font-family:var(--body);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:0.07em;
+  text-transform:uppercase;
+  color:var(--bright);
+  padding-bottom:var(--s-sm);
+  margin-bottom:var(--s-md);
+  border-bottom:1px solid var(--border);
+}
+.card-upd{
+  font-family:var(--mono);
+  font-size:10.5px;
+  font-weight:400;
+  color:var(--dim);
+  text-transform:none;
+  letter-spacing:0;
+}
+
+.mbox-label{
+  font-family:var(--body);
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-bottom:var(--s-xs);
+}
+.mbox-val{
+  font-family:var(--mono);
+  font-size:22px;
+  font-weight:600;
+  font-feature-settings:"tnum";
+  line-height:1.05;
+  color:var(--bright);
+}
+.mbox-sub{
+  font-family:var(--body);
+  font-size:11px;
+  color:var(--dim);
+  margin-top:var(--s-xs);
+  line-height:1.5;
+}
+
+.srow{padding:var(--s-sm) 0}
+.srow-label{font-family:var(--body);font-size:11.5px;font-weight:500;color:var(--dim);flex:0 0 150px}
+.srow-val{font-family:var(--body);font-size:12px;color:var(--text);line-height:1.5}
+
+.dev-list li{
+  font-family:var(--body);
+  font-size:12.5px;
+  line-height:1.65;
+  padding:var(--s-sm) 0 var(--s-sm) var(--s-md);
+  color:var(--text);
+  border-bottom:1px solid var(--border);
+  max-width:84ch;
+}
+.dev-list li::before{
+  content:'›';
+  position:absolute;
+  left:0;
+  top:var(--s-sm);
+  color:var(--amber);
+  font-weight:700;
+}
+
+.wl-label{font-family:var(--body);font-weight:700;font-size:13px;color:var(--bright)}
+.wl-deadline{font-family:var(--mono);font-size:10.5px;color:var(--amber)}
+.wl-notes{font-family:var(--body);font-size:12px;color:var(--text);line-height:1.6}
+
+.sc-name{font-family:var(--body);font-weight:700;font-size:13px;color:var(--bright)}
+.sc-prob{font-family:var(--mono);font-weight:700;font-size:18px;color:var(--amber);font-feature-settings:"tnum"}
+.sc-cell-label{font-family:var(--body);font-size:9.5px;font-weight:600}
+.sc-cell-val{font-family:var(--body);font-size:11.5px}
+.sc-notes{font-family:var(--body);font-size:11.5px;line-height:1.6}
+
+.travel-country{font-family:var(--body);font-weight:700;font-size:13px}
+.travel-level{font-family:var(--body);font-size:11px;font-weight:600}
+
+.tab{font-family:var(--body);font-size:12px;font-weight:500;padding:10px 14px}
+.tab.active{font-weight:600}
+
+.xspark-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:var(--s-md);
+}
+@media(max-width:900px){.xspark-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.xspark-grid{grid-template-columns:1fr}}
+.xspark-card{
+  position:relative;
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:14px 14px 12px;
+  overflow:hidden;
+  transition:border-color .15s;
+}
+.xspark-card:hover{border-color:var(--border2)}
+.xspark-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--red),var(--amber),var(--blue),var(--green));
+  opacity:0.45;
+}
+.xspark-label{
+  font-family:var(--body);
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--dim);
+  margin-bottom:var(--s-xs);
+  line-height:1.2;
+}
+.xspark-val{
+  font-family:var(--mono);
+  font-size:22px;
+  font-weight:600;
+  font-feature-settings:"tnum";
+  color:var(--bright);
+  line-height:1.1;
+  display:flex;
+  align-items:baseline;
+  gap:var(--s-sm);
+}
+.xspark-delta{
+  font-family:var(--mono);
+  font-size:11.5px;
+  font-weight:600;
+  font-feature-settings:"tnum";
+}
+.xspark-delta.up   { color:var(--val-up-bad) }     
+.xspark-delta.dn   { color:var(--val-dn-good) }    
+.xspark-delta.flat { color:var(--val-flat) }
+.xspark-sub{
+  font-family:var(--body);
+  font-size:11px;
+  color:var(--dim);
+  margin-top:var(--s-xs);
+  line-height:1.5;
+}
+.xspark-footer{
+  font-family:var(--mono);
+  font-size:9.5px;
+  color:var(--dim);
+  margin-top:var(--s-sm);
+  padding-top:var(--s-sm);
+  border-top:1px dotted var(--border);
+  line-height:1.45;
+}
+
 </style>
 </head>
 <body>
@@ -2719,6 +2909,19 @@ function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function fmt(v) { return v != null ? esc(String(v)) : '—'; }
+function xspark(label, val, delta_text, delta_dir, sub) {
+  var dpart = '';
+  if (delta_text) {
+    var cls = delta_dir || 'flat';
+    dpart = '<span class="xspark-delta '+cls+'">'+delta_text+'</span>';
+  }
+  return '<div class="xspark-card">'
+    +'<div class="xspark-label">'+label+'</div>'
+    +'<div class="xspark-val">'+(val==null||val===''?'—':val)+dpart+'</div>'
+    +(sub?'<div class="xspark-sub">'+sub+'</div>':'')
+  +'</div>';
+}
+
 function mbox(label, val, cls, sub) {
   return '<div class="mbox"><div class="mbox-label">'+esc(label)+'</div>'
     +'<div class="mbox-val '+(cls||'')+'">'+(val != null ? esc(String(val)) : '—')+'</div>'
@@ -3047,15 +3250,35 @@ function render() {
 
   var mx = D.metrics || {};
   document.getElementById('mkt-upd').textContent = ts(mx.updated) || upd;
+  var brentRange = mx.brent_week_range || '';
+  var brentDelta = '', brentDir = '';
+  if (brentRange.indexOf('→') !== -1) {
+    var parts = brentRange.replace(/[\$]/g,'').split('→');
+    var a = parseFloat(parts[0]), b = parseFloat(parts[1]);
+    if (!isNaN(a) && !isNaN(b)) {
+      var dp = ((b-a)/a*100).toFixed(1);
+      brentDelta = (b>a?'+':'') + dp + '% wk';
+      brentDir = b>a ? 'up' : (b<a ? 'dn' : 'flat');
+    }
+  }
+  var egpVal = parseFloat(mx.egp_usd);
+  var egpPanic = parseFloat(mx.egp_panic_threshold) || 55;
+  var egpDelta = '', egpDir = '';
+  if (!isNaN(egpVal) && !isNaN(egpPanic)) {
+    var headroom = (egpPanic - egpVal).toFixed(2);
+    egpDelta = headroom + ' from panic';
+    egpDir = egpVal >= egpPanic ? 'up' : (egpPanic - egpVal < 2 ? 'up' : 'flat');
+  }
+  document.getElementById('mkt-boxes').className = 'xspark-grid';
   document.getElementById('mkt-boxes').innerHTML = [
-    mbox('Brent futures', '$' + (mx.brent_usd||'—'), 'amber', mx.brent_week_range||''),
-    mbox('Brent spot', '$' + (mx.brent_spot_usd||'—'), 'red', 'Physical market'),
-    mbox('EGP/USD', mx.egp_usd||'—', 'yellow', 'Panic threshold: '+mx.egp_panic_threshold),
-    mbox('US gas avg', '$' + (mx.us_gas_average||'—'), 'red', mx.us_gas_note||''),
-    mbox('Suez revenue/wk', '$'+(mx.suez_revenue_weekly_m||'—')+'M', 'amber', 'Pre-war: $'+(mx.suez_pre_war_weekly_m||190)+'M'),
-    mbox('EGP peak', mx.egp_week_high||'—', 'red', 'Peak since war began'),
-    mbox('Egypt bonds', '+'+(mx.egypt_bond_spread_bps||'—')+'bps', 'red', 'Spread over UST'),
-    mbox('Hormuz transits', (D.hormuz && D.hormuz.ships_monday)||'—', 'red', 'Ships Monday')
+    xspark('Brent futures', '$' + (mx.brent_usd||'—'), brentDelta, brentDir, brentRange),
+    xspark('Brent spot',    '$' + (mx.brent_spot_usd||'—'), '', '', 'Physical market'),
+    xspark('EGP/USD',       mx.egp_usd||'—', egpDelta, egpDir, 'Panic threshold ' + (mx.egp_panic_threshold||'—')),
+    xspark('US gas avg',    '$' + (mx.us_gas_average||'—'), '', '', mx.us_gas_note||''),
+    xspark('Suez weekly',   '$'+(mx.suez_revenue_weekly_m||'—')+'M', '', '', 'Pre-war $'+(mx.suez_pre_war_weekly_m||190)+'M'),
+    xspark('EGP peak',      mx.egp_week_high||'—', '', '', 'War-period high'),
+    xspark('Egypt bonds',   '+'+(mx.egypt_bond_spread_bps||'—')+'bps', '', '', 'Spread over UST'),
+    xspark('Hormuz transit',(D.hormuz && D.hormuz.ships_monday)||'—', '', '', 'Ships Mon — pre-war ~50')
   ].join('');
   document.getElementById('mkt-notes').textContent = mx.brent_spot_note || '';
   document.getElementById('mkt-notes-upd').textContent = ts(mx.updated) || upd;
