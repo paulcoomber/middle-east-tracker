@@ -383,13 +383,14 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
 
 .headline{
   font-family:var(--body);
-  font-weight:700;
-  font-size:22px;
-  letter-spacing:-0.01em;
-  line-height:1.25;
+  font-weight:600;
+  font-size:20px;
+  letter-spacing:-0.005em;
+  line-height:1.3;
   color:var(--bright);
-  margin-bottom:var(--s-sm);
-  max-width:78ch;
+  margin-bottom:var(--s-md);
+  max-width:min(56ch,720px);
+  overflow-wrap:break-word;
 }
 
 .summary-text{
@@ -401,7 +402,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
   margin-top:var(--s-md);
   padding-top:var(--s-md);
   border-top:1px solid var(--border);
-  max-width:72ch;
+  max-width:min(68ch,820px);
+  overflow-wrap:break-word;
+  white-space:pre-wrap;
 }
 
 .card-title{
@@ -3240,8 +3243,26 @@ function render() {
   renderExcoTop(D, upd);
 
   document.getElementById('brief-upd').textContent = upd;
-  document.getElementById('brief-headline').textContent = br.headline || '—';
-  document.getElementById('brief-summary').textContent = br.summary || '';
+  var _hdRaw = (br.headline || '').trim();
+  var _hdLead = '—', _hdRest = '';
+  if (_hdRaw) {
+    var m = _hdRaw.match(/^(.+?[.!?])\s+([\s\S]+)$/);
+    if (m && m[1].length <= 220) {
+      _hdLead = m[1];
+      _hdRest = m[2];
+    } else if (_hdRaw.length <= 180) {
+      _hdLead = _hdRaw;
+    } else {
+      var cut = _hdRaw.lastIndexOf(' ', 180);
+      _hdLead = _hdRaw.slice(0, cut > 80 ? cut : 180) + '…';
+      _hdRest = _hdRaw.slice(cut > 80 ? cut + 1 : 180);
+    }
+  }
+  document.getElementById('brief-headline').textContent = _hdLead;
+  var _summaryParts = [];
+  if (_hdRest) _summaryParts.push(_hdRest);
+  if (br.summary) _summaryParts.push(br.summary);
+  document.getElementById('brief-summary').textContent = _summaryParts.join('\n\n');
   document.getElementById('brief-cf').textContent = br.ceasefire_status || '—';
   document.getElementById('brief-nuc').textContent = br.nuclear_status || '—';
   document.getElementById('brief-gnd').textContent = br.ground_op_status || '—';
