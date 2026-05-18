@@ -410,6 +410,16 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
 .summary-text .brief-para:last-child{
   margin-bottom:0;
 }
+.summary-text .brief-topic{
+  font-family:var(--body);
+  font-weight:600;
+  font-size:17px;
+  line-height:1.3;
+  letter-spacing:-0.005em;
+  color:var(--bright);
+  margin:0 0 var(--s-md);
+  max-width:min(36ch,540px);
+}
 
 .card-title{
   font-family:var(--body);
@@ -3248,11 +3258,16 @@ function render() {
 
   document.getElementById('brief-upd').textContent = upd;
   var _hdRaw = (br.headline || '').trim();
-  var _eyebrow = '', _body = _hdRaw;
-  var em = _hdRaw.match(/^([^:]{4,80}):\s+([\s\S]+)$/);
-  if (em && em[1].length <= 70) {
-    _eyebrow = em[1];
-    _body = em[2];
+  var _kicker = '', _topic = '', _body = _hdRaw;
+  var km = _hdRaw.match(/^(Day\s+\d+\s*\([^)]+\))\s*:\s*([\s\S]+)$/);
+  if (km) {
+    _kicker = km[1];
+    _body = km[2];
+    var tm = _body.match(/^([A-Z0-9 '"&,$%/+\-:.()]{8,140})\s+—\s+([\s\S]+)$/);
+    if (tm) {
+      _topic = tm[1].trim();
+      _body = tm[2];
+    }
   }
   if (br.summary && br.summary.trim()) {
     _body = _body + '\n\n' + br.summary.trim();
@@ -3263,7 +3278,7 @@ function render() {
     var out = [];
     blocks.forEach(function(block){
       if (block.length <= 380) { out.push(block); return; }
-      var sentences = block.split(/(?<=[.!?])\s+/);
+      var sentences = block.split(/(?<=[.!?])\s+(?=[A-Z(])/);
       var current = '';
       sentences.forEach(function(s){
         if (!current) { current = s; return; }
@@ -3279,10 +3294,16 @@ function render() {
     return out;
   }
   var _paras = _toParagraphs(_body);
-  document.getElementById('brief-headline').textContent = _eyebrow || '';
-  document.getElementById('brief-summary').innerHTML = _paras.map(function(p){
-    return '<p class="brief-para">'+ p.replace(/</g,'&lt;').replace(/>/g,'&gt;') +'</p>';
-  }).join('');
+  function _escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  document.getElementById('brief-headline').textContent = _kicker || '';
+  var html = '';
+  if (_topic) {
+    var titled = _topic.toLowerCase().replace(/\b([a-z])/g, function(_,c){return c.toUpperCase();})
+      .replace(/\b(Us|Uk|Eu|Gcc|Egp|Imf|Cbe|Iaea|Heu|Aaa|Lng|Mou|Wfh|Pm|It|Ai|Eg|Cpi|Yoy)\b/g, function(m){return m.toUpperCase();});
+    html += '<h2 class="brief-topic">'+ _escHtml(titled) +'</h2>';
+  }
+  html += _paras.map(function(p){ return '<p class="brief-para">'+ _escHtml(p) +'</p>'; }).join('');
+  document.getElementById('brief-summary').innerHTML = html;
   document.getElementById('brief-cf').textContent = br.ceasefire_status || '—';
   document.getElementById('brief-nuc').textContent = br.nuclear_status || '—';
   document.getElementById('brief-gnd').textContent = br.ground_op_status || '—';
