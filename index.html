@@ -876,13 +876,13 @@ Object.assign(window.GULF_RISK_DATA, {
     display_order: "ELEVATED",
     label_caveat: "DIRECTION TRACKER, not a calibrated index. Numbers reflect analyst judgment scored against five named signals per axis. Treat the trajectory as the signal; do not over-interpret the absolute level.",
     description: "Monthly direction tracker for foreign-counterparty trust in Egypt, since Q1 2026. Five signals per axis (commitments honoured, capital flows, deposits, military cooperation, diplomatic alignment) each scored 0-20; sum = 0-100 figure. Direction matters more than absolute level.",
-    methodology: "Five signals per axis, each scored 0-20 by analyst judgment, summed for a 0-100 figure. Signals defined under signals_by_party. Subjective — score against narrative facts, not market data. Flag for replacement with quantitative composite (e.g. CDS, deposit balances, FDI flows) when those are available consistently across the three axes.",
+    methodology: "Five signals per axis, each scored 0-20 by analyst judgment, summed for a 0-100 figure. Signals defined under signals_by_party. CONVENTION: higher signal score = MORE TRUST on that signal; lower = LESS TRUST. Signal score INCREASE means that signal improved (e.g., risk defused, fresh commitment landed); DECREASE means that signal deteriorated (e.g., fresh threat surfaced, commitment slipped). Subjective — score against narrative facts, not market data. Flag for replacement with quantitative composite (e.g. CDS, deposit balances, FDI flows) when those are available consistently across the three axes.",
     review_cadence: "Monthly — first business day of each month, with mid-month update if a load-bearing signal flips (e.g. Kuwaiti deposit pull, IMF program suspension, fresh Gulf commitment).",
     monthly_series: {
-      labels: ["Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026"],
-      gcc_trust:      [62, 58, 48, 38],
-      israeli_trust:  [55, 50, 42, 35],
-      eu_trust:       [60, 55, 48, 42],
+      labels: ["Jan 2026", "Feb 2026", "Mar 2026", "Apr 2026", "May 2026"],
+      gcc_trust:      [62, 58, 48, 38, 32],
+      israeli_trust:  [55, 50, 42, 35, 36],
+      eu_trust:       [60, 55, 48, 42, 39],
       colours: { gcc: "#10b981", israeli: "#3b82f6", eu: "#f59e0b" },
       y_min: 0,  y_max: 100,
       crisis_threshold: 30,
@@ -890,7 +890,8 @@ Object.assign(window.GULF_RISK_DATA, {
         "Jan 2026: pre-war stable baseline. GCC anchored by Ras El-Hekma 2024 deal. Israel: gas-import partnership operational. EU: IMF-program halo + Article IV positive.",
         "Feb 2026: war begins 28 Feb. All three drop on Suez disruption + Egyptian neutrality posture.",
         "Mar 2026: GCC -10 — Egypt declined military support for GCC in Iran war; Gulf bilateral tone shifts. Israeli trust drops as Egypt distances. EU largely unaffected initially.",
-        "Apr 2026: GCC -10 — open Kuwaiti-media calls to withdraw $2B Kuwaiti CBE deposit (Arab Center DC + Atlantic Council 'they have been exposed'). Israeli trust drops on Bekaa Valley spillover risk. EU drops on visible energy/blackout posture and IMF June review pending in non-routine context."
+        "Apr 2026: GCC -10 — open Kuwaiti-media calls to withdraw $2B Kuwaiti CBE deposit (Arab Center DC + Atlantic Council 'they have been exposed'). Israeli trust drops on Bekaa Valley spillover risk. EU drops on visible energy/blackout posture and IMF June review pending in non-routine context.",
+        "May 2026: GCC -6 — Gulf-frozen reality crystallises with Rystad $58B regional repair bill (15 April) + Saudi 2026 $44B deficit + Ras Laffan 5y rebuild confirming Gulf SWFs cannot deploy capital; Egypt-GCC alignment skepticism deepens under Trump-Netanyahu Sun renewed-war framing. Israeli trust +1 — Lebanon 45-day truce extension (14-15 May Washington talks; expiry ~30 June) defuses spillover risk on shared border, partial offset to Trump-Iran escalation pressure. EU -3 — IMF June review reframed from routine to existential under Gulf-frozen reality. Scoring back-tested for April reproduces 38/35/42, validating framework; full signal-by-signal scoring in gulf-risk-decision-log.md (2026-05-18 14:00 UTC entry)."
       ]
     },
     signals_by_party: {
@@ -914,8 +915,8 @@ Object.assign(window.GULF_RISK_DATA, {
         "Standard Chartered Jan 5 'robust FX inflows' forecast (PRE-WAR) replaced by March 11 'easing delayed as inflation rebounds' — same bank, sharply revised view"
       ]
     },
-    next_review_date: "End May 2026 (Q1 + April closeout)",
-    updated: "2026-04-29T21:28:06.000Z"
+    next_review_date: "End June 2026 (May closeout + June IMF review window — June IMF review reframed routine→existential under Gulf-frozen reality, watch for slip/conditional pass)",
+    updated: "2026-05-18T14:00:00.000Z"
   },
 
   government_commitments: {
