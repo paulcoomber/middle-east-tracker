@@ -607,6 +607,58 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
   .brief-aside-title{flex-basis:100%;margin-bottom:0}
 }
 
+.brief-aside .mbox-val{
+  max-height:5.5em;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  font-family:var(--body);
+  font-size:13px;
+  font-weight:500;
+  line-height:1.4;
+  color:var(--bright);
+}
+.brief-aside .mbox-val.red   { color:var(--red2) }
+.brief-aside .mbox-val.amber { color:var(--amber2) }
+.brief-aside .mbox-val.green { color:var(--green) }
+.brief-aside .mbox-val .mb-short{
+  display:block;
+}
+.brief-aside .mbox-val .mb-more{
+  margin-top:var(--s-xs);
+  font-family:var(--body);
+  font-size:11px;
+  font-weight:400;
+  color:var(--dim);
+  max-height:none;
+  overflow:visible;
+}
+.brief-aside .mbox-val .mb-more summary{
+  cursor:pointer;
+  list-style:none;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  font-size:9.5px;
+  font-weight:600;
+}
+.brief-aside .mbox-val .mb-more summary::-webkit-details-marker{display:none}
+.brief-aside .mbox-val .mb-more[open] summary::before{content:'▾ '}
+.brief-aside .mbox-val .mb-more:not([open]) summary::before{content:'▸ '}
+.brief-aside .mbox-val .mb-rest{
+  margin-top:var(--s-xs);
+  font-family:var(--body);
+  font-size:11.5px;
+  font-weight:400;
+  color:var(--text);
+  line-height:1.55;
+  max-height:none;
+  white-space:normal;
+  word-wrap:break-word;
+}
+
+.brief-aside .mbox-val:has(.mb-more[open]){
+  max-height:none;
+}
+
 </style>
 </head>
 <body>
@@ -655,9 +707,9 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
       </div>
       <aside class="brief-aside">
         <div class="brief-aside-title">At a glance</div>
-        <div class="mbox"><div class="mbox-label">Ceasefire</div><div class="mbox-val red" id="brief-cf" style="font-size:13px;margin-top:4px">—</div></div>
-        <div class="mbox"><div class="mbox-label">Nuclear status</div><div class="mbox-val amber" id="brief-nuc" style="font-size:12px;margin-top:4px;line-height:1.35">—</div></div>
-        <div class="mbox"><div class="mbox-label">Ground ops</div><div class="mbox-val red" id="brief-gnd" style="font-size:12px;margin-top:4px;line-height:1.35">—</div></div>
+        <div class="mbox"><div class="mbox-label">Ceasefire</div><div class="mbox-val red" id="brief-cf">—</div></div>
+        <div class="mbox"><div class="mbox-label">Nuclear status</div><div class="mbox-val amber" id="brief-nuc">—</div></div>
+        <div class="mbox"><div class="mbox-label">Ground ops</div><div class="mbox-val red" id="brief-gnd">—</div></div>
       </aside>
     </div>
   </div>
@@ -3340,9 +3392,43 @@ function render() {
   }
   html += _paras.map(function(p){ return '<p class="brief-para">'+ _escHtml(p) +'</p>'; }).join('');
   document.getElementById('brief-summary').innerHTML = html;
-  document.getElementById('brief-cf').textContent = br.ceasefire_status || '—';
-  document.getElementById('brief-nuc').textContent = br.nuclear_status || '—';
-  document.getElementById('brief-gnd').textContent = br.ground_op_status || '—';
+  function _shortStatus(text) {
+    if (!text) return { short: '—', rest: '' };
+    var t = String(text).trim();
+    if (t.length <= 90) return { short: t, rest: '' };
+    var breaks = [];
+    var rx = /(\.|;|:| —)\s/g;
+    var mm;
+    while ((mm = rx.exec(t)) !== null) {
+      breaks.push(mm.index + mm[0].length);
+      if (mm.index > 120) break;
+    }
+    var cutAt = 0;
+    for (var i = 0; i < breaks.length; i++) {
+      if (breaks[i] >= 30 && breaks[i] <= 90) { cutAt = breaks[i]; break; }
+    }
+    if (!cutAt) {
+      cutAt = t.lastIndexOf(' ', 80);
+      if (cutAt < 30) cutAt = 80;
+    }
+    return { short: t.slice(0, cutAt).trim().replace(/[.;:—]+$/, ''), rest: t.slice(cutAt).trim() };
+  }
+  function _renderStatusMbox(elId, raw) {
+    var el = document.getElementById(elId);
+    if (!el) return;
+    var s = _shortStatus(raw);
+    if (s.rest) {
+      el.innerHTML = '<span class="mb-short">' + s.short.replace(/</g,'&lt;') + '</span>'
+        + ' <details class="mb-more"><summary>more</summary>'
+        + '<div class="mb-rest">' + s.rest.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>'
+        + '</details>';
+    } else {
+      el.textContent = s.short;
+    }
+  }
+  _renderStatusMbox('brief-cf',  br.ceasefire_status);
+  _renderStatusMbox('brief-nuc', br.nuclear_status);
+  _renderStatusMbox('brief-gnd', br.ground_op_status);
   var devs = br.key_developments || [];
   document.getElementById('brief-devs').innerHTML = devs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('');
 
