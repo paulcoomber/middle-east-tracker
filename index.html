@@ -1055,6 +1055,121 @@ table{
 .srow-val.red{color:var(--red2)}
 .srow-val.green{color:var(--green)}
 
+.summary-text .brief-inline-list{
+  list-style:none;
+  padding:0;
+  margin:var(--s-xs) 0 var(--s-md);
+}
+.summary-text .brief-inline-list li{
+  font-family:var(--body);
+  font-size:13px;
+  font-weight:500;
+  color:var(--text);
+  line-height:1.55;
+  padding:var(--s-xs) 0 var(--s-xs) var(--s-md);
+  position:relative;
+  max-width:min(60ch,640px);
+  border-left:2px solid var(--border2);
+  margin-bottom:var(--s-xs);
+  padding-left:var(--s-md);
+}
+.summary-text .brief-inline-list li::before{
+  content:'';
+}
+
+.summary-text .brief-more{
+  margin-top:var(--s-md);
+  border-top:1px dashed var(--border);
+  padding-top:var(--s-md);
+}
+.summary-text .brief-more summary{
+  cursor:pointer;
+  list-style:none;
+  font-family:var(--body);
+  font-size:11px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  color:var(--amber);
+  padding:var(--s-sm) 0;
+}
+.summary-text .brief-more summary::-webkit-details-marker{display:none}
+.summary-text .brief-more[open] summary::before{content:'▾ '; color:var(--amber)}
+.summary-text .brief-more:not([open]) summary::before{content:'▸ '; color:var(--amber)}
+.summary-text .brief-more[open] summary{color:var(--bright)}
+
+.card-title{
+  border-left-width:4px;
+  padding-left:12px;
+  margin-left:-14px;
+}
+.card.exco-critical{
+  border-left:1px solid rgba(239,68,68,0.25);
+}
+.card.exco-high{
+  border-left:1px solid rgba(232,160,32,0.18);
+}
+
+.brief-aside-strip{
+  margin-top:var(--s-md);
+  padding-top:var(--s-md);
+  border-top:1px solid var(--border);
+}
+.brief-aside-strip .strip-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding:var(--s-sm) 0;
+  border-bottom:1px solid var(--border);
+  gap:var(--s-md);
+}
+.brief-aside-strip .strip-row:last-child{border-bottom:none}
+.brief-aside-strip .strip-label{
+  font-family:var(--body);
+  font-size:10.5px;
+  font-weight:600;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  color:var(--dim);
+}
+.brief-aside-strip .strip-val{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:600;
+  font-feature-settings:"tnum";
+  color:var(--bright);
+}
+.brief-aside-strip .strip-val .strip-delta{
+  font-size:10.5px;
+  font-weight:500;
+  margin-left:var(--s-xs);
+}
+.brief-aside-strip .strip-val .strip-delta.up{color:var(--red2)}
+.brief-aside-strip .strip-val .strip-delta.dn{color:var(--green)}
+.brief-aside-strip .strip-val .strip-delta.flat{color:var(--dim)}
+
+.dev-list li.dev-framing{
+  background:rgba(232,160,32,0.05);
+  border-left:3px solid var(--amber);
+  padding-left:var(--s-md);
+  border-radius:0 4px 4px 0;
+  border-bottom-color:transparent;
+}
+.dev-list li.dev-framing::before{content:'★';color:var(--amber)}
+.dev-framing-badge{
+  display:inline-block;
+  background:var(--amber);
+  color:#1a1a1a;
+  font-family:var(--body);
+  font-size:9.5px;
+  font-weight:700;
+  padding:1px 6px;
+  border-radius:3px;
+  margin-right:var(--s-sm);
+  letter-spacing:0.05em;
+  vertical-align:middle;
+}
+
 </style>
 </head>
 <body>
@@ -1106,6 +1221,8 @@ table{
         <div class="mbox"><div class="mbox-label">Ceasefire</div><div class="mbox-val red" id="brief-cf">—</div></div>
         <div class="mbox"><div class="mbox-label">Nuclear status</div><div class="mbox-val amber" id="brief-nuc">—</div></div>
         <div class="mbox"><div class="mbox-label">Ground ops</div><div class="mbox-val red" id="brief-gnd">—</div></div>
+      
+        <div class="brief-aside-strip" id="brief-aside-strip"></div>
       </aside>
     </div>
   </div>
@@ -3745,6 +3862,55 @@ function render() {
   renderExcoTop(D, upd);
 
   document.getElementById('brief-upd').textContent = upd;
+
+  var _ACRO = new Set([
+    'US','UK','EU','UAE','USA','KSA','GCC','NATO','OPEC','OPEC+','MENA','BRICS',
+    'IAEA','HEU','MOU','UNGA','UNSC','ICC','UN','NPT','NSG','CIA','NSA','DOD','DOJ','FBI',
+    'IRGC','IDF','CENTCOM','EUCOM','NATO','RAF','USAF','USCG','USN',
+    'EGP','USD','GBP','EUR','JPY','CNY','SAR','AED','QAR','KWD','OMR','BHD',
+    'NIR','CPI','GDP','FX','ECB','CBE','IMF','IFC','WB','EIB','BOJ','BOE','PBOC',
+    'AAA','LNG','OPEC','HFO','UCO','BBL','BPS','UTC','GMT','EDT','EST','BST','IST','JST',
+    'AM','PM','HQ','TLS','VP','SVP','EVP','CEO','CFO','COO','CIO','CISO','CTO','CMO',
+    'API','SDK','OS','GPS','HTTP','HTTPS','URL','HTML','CSS','JSON','XML','TLS','SSL',
+    'WSJ','FT','NYT','BBC','CNN','NPR','PBS','AFP','SCMP','TASS','RIA','IRNA','MEMRI','MEES',
+    'POTUS','VPOTUS','SCOTUS','MAGA','EU27',
+    'AI','ML','IT','RD','PR','HR','QA','UX','UI','UI/UX','SLA','KPI','OKR',
+    'CDN','CDN1','VPN','WAN','LAN','TLS','XSS','CSRF','XSRF',
+    'NO','OK','GO','YES','MAX','MIN','TBD','TBC','FYI','ETA','EOL','EOQ','EOY','YTD','QoQ','YoY','MoM','WoW',
+    'COE','CISO','COD','CTI','SOC','SOX','GDPR','HIPAA','PCI','PII',
+    'OEM','OEMS','MOAB','HARM','MK-23','MK-83','MK-84','GBU','JDAM','THAAD','S-300','S-400',
+    'F-35','F-15','F-16','F-22','F/A-18','B-1','B-2','B-21','B-52','C-17','C-130','KC-46',
+    'CH-47','UH-60','AH-64','AC-130','MQ-9','RQ-4','MQ-1',
+    'NIE','PDB','SCIF','TS','SCI','HUMINT','SIGINT','OSINT','GEOINT','MASINT',
+    'TANT','UAE','UAE-anchored','CO2','SO2','NOx'
+  ]);
+  function _deshout(s) {
+    if (!s) return s;
+    return s.replace(/([A-Z][A-Z0-9'\-/&]*)/g, function(word) {
+      var bare = word.replace(/[^A-Z0-9]/g, '');
+      if (bare.length <= 2) return word; // 1-2 letter all-caps: keep (mostly acronyms)
+      if (_ACRO.has(word) || _ACRO.has(bare)) return word;
+      return word.charAt(0) + word.slice(1).toLowerCase();
+    });
+  }
+
+  function _maybeBullet(p) {
+    var plusCount = (p.match(/\s\+\s/g) || []).length;
+    if (plusCount >= 3) {
+      var im = p.match(/^([\s\S]+?:\s+)(.+)$/);
+      if (im && im[2].indexOf(' + ') !== -1) {
+        var intro = im[1];
+        var items = im[2].split(/\s\+\s/).map(function(s){return s.trim();}).filter(Boolean);
+        if (items.length >= 3) {
+          return _escHtml(intro) + '<ul class="brief-inline-list">'
+            + items.map(function(it){return '<li>'+_escHtml(it)+'</li>';}).join('')
+            + '</ul>';
+        }
+      }
+    }
+    return _escHtml(p);
+  }
+
   var _hdRaw = (br.headline || '').trim();
   var _kicker = '', _topic = '', _body = _hdRaw;
   var km = _hdRaw.match(/^(Day\s+\d+\s*\([^)]+\))\s*:\s*([\s\S]+)$/);
@@ -3760,6 +3926,7 @@ function render() {
   if (br.summary && br.summary.trim()) {
     _body = _body + '\n\n' + br.summary.trim();
   }
+
   function _toParagraphs(text) {
     if (!text) return [];
     var blocks = text.split(/\n\n+/).map(function(s){return s.trim();}).filter(Boolean);
@@ -3781,16 +3948,29 @@ function render() {
     });
     return out;
   }
-  var _paras = _toParagraphs(_body);
   function _escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  var _paras = _toParagraphs(_body).map(_deshout);
   document.getElementById('brief-headline').textContent = _kicker || '';
+
   var html = '';
   if (_topic) {
-    var titled = _topic.toLowerCase().replace(/\b([a-z])/g, function(_,c){return c.toUpperCase();})
-      .replace(/\b(Us|Uk|Eu|Gcc|Egp|Imf|Cbe|Iaea|Heu|Aaa|Lng|Mou|Wfh|Pm|It|Ai|Eg|Cpi|Yoy)\b/g, function(m){return m.toUpperCase();});
+    var titled = _deshout(_topic.toLowerCase().replace(/\b([a-z])/g, function(_,c){return c.toUpperCase();}));
     html += '<h2 class="brief-topic">'+ _escHtml(titled) +'</h2>';
   }
-  html += _paras.map(function(p){ return '<p class="brief-para">'+ _escHtml(p) +'</p>'; }).join('');
+  var ABOVE_FOLD = 3;
+  var aboveFold = _paras.slice(0, ABOVE_FOLD);
+  var belowFold = _paras.slice(ABOVE_FOLD);
+  html += aboveFold.map(function(p){
+    return '<p class="brief-para">'+ _maybeBullet(p) +'</p>';
+  }).join('');
+  if (belowFold.length) {
+    html += '<details class="brief-more"><summary>Read the rest ('+ belowFold.length +' more paragraph'+ (belowFold.length>1?'s':'') +')</summary>';
+    html += belowFold.map(function(p){
+      return '<p class="brief-para">'+ _maybeBullet(p) +'</p>';
+    }).join('');
+    html += '</details>';
+  }
   document.getElementById('brief-summary').innerHTML = html;
   function _shortStatus(text) {
     if (!text) return { short: '—', rest: '' };
@@ -3829,8 +4009,40 @@ function render() {
   _renderStatusMbox('brief-cf',  br.ceasefire_short || br.ceasefire_status);
   _renderStatusMbox('brief-nuc', br.nuclear_short    || br.nuclear_status);
   _renderStatusMbox('brief-gnd', br.ground_short     || br.ground_op_status);
+
+  (function renderAsideStrip(){
+    var strip = document.getElementById('brief-aside-strip');
+    if (!strip) return;
+    var mx = D.metrics || {};
+    var hz = D.hormuz || {};
+    function _dirCls(now, baseline) {
+      var n = parseFloat(now), b = parseFloat(baseline);
+      if (isNaN(n) || isNaN(b)) return 'flat';
+      if (n > b * 1.005) return 'up';
+      if (n < b * 0.995) return 'dn';
+      return 'flat';
+    }
+    function _row(label, val, delta, dir){
+      return '<div class="strip-row"><span class="strip-label">'+label+'</span>'
+        +'<span class="strip-val">'+val+(delta?'<span class="strip-delta '+(dir||'flat')+'">'+delta+'</span>':'')+'</span></div>';
+    }
+    var brentBase = 105;
+    var egpBase = 52.5;
+    var hormuzBase = 50;
+    strip.innerHTML = ''
+      + _row('Brent', '$'+(mx.brent_usd||'—'), mx.brent_usd ? (parseFloat(mx.brent_usd) > brentBase ? '▲' : '▼') : '', _dirCls(mx.brent_usd, brentBase))
+      + _row('EGP', mx.egp_usd||'—', mx.egp_usd ? (parseFloat(mx.egp_usd) > egpBase ? '▲' : '▼') : '', _dirCls(mx.egp_usd, egpBase))
+      + _row('Hormuz', (hz.ships_24h||hz.ships_monday||'—')+'/day', '', '');
+  })();
   var devs = br.key_developments || [];
-  document.getElementById('brief-devs').innerHTML = devs.map(function(d){return '<li>'+esc(d)+'</li>';}).join('');
+  document.getElementById('brief-devs').innerHTML = devs.map(function(d){
+    var t = String(d || '');
+    var isFraming = /STRUCTURAL REFRAME|FRAMING ENRICHMENT|FRAMING REFRAME/.test(t);
+    if (isFraming) {
+      return '<li class="dev-framing"><span class="dev-framing-badge">FRAMING</span>'+esc(t)+'</li>';
+    }
+    return '<li>'+esc(t)+'</li>';
+  }).join('');
 
   var mx = D.metrics || {};
   document.getElementById('mkt-upd').textContent = ts(mx.updated) || upd;
