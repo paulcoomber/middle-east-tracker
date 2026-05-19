@@ -108,6 +108,7 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--b
 .tab.active{color:var(--amber);border-bottom-color:var(--amber)}
 
 .content{flex:1;overflow-y:auto;padding:16px;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.content > *{max-width:1600px;margin-left:auto;margin-right:auto}
 .content::-webkit-scrollbar{width:4px}
 .content::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 
@@ -1171,6 +1172,106 @@ table{
   vertical-align:middle;
 }
 
+.scenario-bar{
+  display:flex;
+  width:100%;
+  height:36px;
+  border-radius:5px;
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  margin:6px 0 8px;
+}
+.scenario-bar-seg{
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  transition:filter .12s;
+}
+.scenario-bar-seg:hover{filter:brightness(1.2)}
+.scenario-bar-seg .scenario-bar-pct{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  color:rgba(0,0,0,0.78);
+  letter-spacing:-0.005em;
+}
+.scenario-bar-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:var(--s-md);
+  padding-top:var(--s-xs);
+}
+.scenario-bar-legend-item{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:var(--body);
+  font-size:11px;
+  color:var(--text);
+}
+.scenario-bar-swatch{
+  display:inline-block;
+  width:10px;
+  height:10px;
+  border-radius:2px;
+}
+
+@media(min-width:1100px){
+  #wl-items{
+    column-count:2;
+    column-gap:var(--s-md);
+  }
+  #wl-items .wl-item{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+}
+
+@media(min-width:1100px){
+  #pr-pending,
+  #pr-resolved{
+    column-count:2;
+    column-gap:var(--s-md);
+  }
+  #pr-pending .pred-item,
+  #pr-resolved .pred-item{
+    break-inside:avoid;
+    page-break-inside:avoid;
+  }
+}
+
+@media(min-width:1100px){
+  #tr-grid{
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr)) !important;
+    gap:var(--s-md);
+  }
+}
+
+@media(min-width:1100px){
+  #src-datapoints,
+  #src-stale,
+  #src-sources{
+    column-count:2;
+    column-gap:var(--s-lg);
+  }
+  #src-datapoints > *,
+  #src-stale > *,
+  #src-sources > *{
+    break-inside:avoid;
+  }
+}
+
+#hormuz-chart-large{
+  width:100%;
+  display:block;
+  border-radius:4px;
+}
+
+.card-title{flex-wrap:wrap}
+
 </style>
 </head>
 <body>
@@ -1410,6 +1511,9 @@ table{
 <div class="page" id="page-scenarios">
   <div class="card">
     <div class="card-title">Scenario Analysis — Tonight &amp; Beyond <span class="card-upd" id="sc-upd"></span></div>
+    <div class="exco-sublabel" style="margin:0 0 6px">Tonight — probability weights (sum 100)</div>
+    <div class="scenario-bar" id="sc-bar"></div>
+    <div class="scenario-bar-legend" id="sc-bar-legend" style="margin-bottom:14px"></div>
     <div id="sc-tonight"></div>
     <div style="margin-top:12px">
       <div class="card-title">30-day watchlist</div>
@@ -1549,16 +1653,17 @@ table{
 
 <div class="page" id="page-hormuz">
   <div class="card">
-    <div class="card-title">Strait of Hormuz <span class="card-upd" id="hz-upd"></span></div>
+    <div class="card-title">Strait of Hormuz — daily transit collapse since 28 Feb <span class="card-upd" id="hz-upd"></span></div>
+    <canvas class="spark-canvas" id="hormuz-chart-large" style="height:200px;margin-bottom:12px"></canvas>
     <div class="grid4" id="hz-boxes"></div>
   </div>
   <div class="card">
-    <div class="card-title">Situation</div>
+    <div class="card-title">Current Situation</div>
     <div id="hz-rows"></div>
   </div>
   <div class="card">
     <div class="card-title">MV Touska Incident</div>
-    <div style="font-size:11px;color:var(--text);line-height:1.8" id="hz-touska"></div>
+    <div style="font-size:13px;color:var(--text);line-height:1.7;max-width:min(72ch,820px)" id="hz-touska"></div>
   </div>
 </div>
 
@@ -4186,8 +4291,25 @@ function render() {
   var sc = D.scenarios || {};
   document.getElementById('sc-upd').textContent = ts(sc.updated) || upd;
   var tonight = sc.tonight || [];
-  document.getElementById('sc-tonight').innerHTML = tonight.map(function(s){
-    return '<div class="sc-card">'
+  var scColors = ['#3b82f6','#22c55e','#ef4444','#f59e0b','#a855f7','#06b6d4','#ec4899'];
+  var totalProb = tonight.reduce(function(a,s){return a + (parseFloat(s.prob)||0);}, 0) || 100;
+  var bar = document.getElementById('sc-bar');
+  var legend = document.getElementById('sc-bar-legend');
+  if (bar) {
+    bar.innerHTML = tonight.map(function(s, i){
+      var pct = (parseFloat(s.prob)||0) / totalProb * 100;
+      return '<div class="scenario-bar-seg" style="width:'+pct.toFixed(2)+'%;background:'+scColors[i % scColors.length]+'" title="'+esc(s.name)+' '+esc(s.prob)+'%">'
+        +(pct > 6 ? '<span class="scenario-bar-pct">'+esc(s.prob)+'%</span>' : '')
+        +'</div>';
+    }).join('');
+  }
+  if (legend) {
+    legend.innerHTML = tonight.map(function(s, i){
+      return '<span class="scenario-bar-legend-item"><span class="scenario-bar-swatch" style="background:'+scColors[i % scColors.length]+'"></span>'+esc(s.name)+' '+esc(s.prob)+'%</span>';
+    }).join('');
+  }
+  document.getElementById('sc-tonight').innerHTML = tonight.map(function(s, i){
+    return '<div class="sc-card" style="border-left:3px solid '+scColors[i % scColors.length]+'">'
       +'<div class="sc-header"><div class="sc-name">'+esc(s.name)+'</div><div class="sc-prob">'+esc(s.prob)+'%</div></div>'
       +'<div class="sc-grid">'
         +'<div class="sc-cell"><div class="sc-cell-label">Oil</div><div class="sc-cell-val">'+esc(s.oil)+'</div></div>'
@@ -4361,6 +4483,12 @@ function render() {
 
   var hz = D.hormuz || {};
   document.getElementById('hz-upd').textContent = ts(hz.updated) || upd;
+  setTimeout(function(){
+    var cs = D.chart_series || {};
+    if (cs.hormuz && cs.hormuz.length) {
+      try { drawSpark('hormuz-chart-large', cs.hormuz, 'rgb(59,130,246)', cs.hormuz_min || 0, cs.hormuz_max || 60, cs.labels || [], cs.war_start_index || 6); } catch(e){}
+    }
+  }, 80);
   document.getElementById('hz-boxes').innerHTML = [
     mbox('Ships Monday', hz.ships_monday||'—', 'red', 'Near-zero traffic'),
     mbox('Vessels turned back', hz.vessels_turned_back_by_blockade||'—', 'amber', 'Since 13 Apr blockade'),
