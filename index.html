@@ -1272,6 +1272,45 @@ table{
 
 .card-title{flex-wrap:wrap}
 
+.dmg-bar-list{
+  display:flex;
+  flex-direction:column;
+  gap:var(--s-sm);
+}
+.dmg-bar-row{
+  display:grid;
+  grid-template-columns:90px 1fr 56px;
+  gap:var(--s-md);
+  align-items:center;
+}
+.dmg-bar-country{
+  font-family:var(--body);
+  font-size:12px;
+  font-weight:600;
+  color:var(--text);
+  letter-spacing:-0.005em;
+}
+.dmg-bar-track{
+  height:18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  position:relative;
+}
+.dmg-bar-fill{
+  height:100%;
+  border-radius:3px;
+  transition:width .25s ease-out;
+}
+.dmg-bar-pct{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:700;
+  font-feature-settings:"tnum";
+  text-align:right;
+}
+
 </style>
 </head>
 <body>
@@ -4008,7 +4047,7 @@ function render() {
   document.getElementById('hdr-threat').textContent = tl;
   document.getElementById('hdr-threat').className = 'threat-pill threat-' + tl.replace(/\s/g,'_');
 
-  document.getElementById('ftr-left').textContent = 'Gulf & Egypt Risk Monitor — Op. Epic Fury Day ' + (m.day||'—');
+  document.getElementById('ftr-left').textContent = 'Gulf & Egypt Risk Monitor — ' + (m.operation || 'Op. Epic Fury') + ' Day ' + (m.day||'—');
   document.getElementById('ftr-right').textContent = 'Updated ' + upd;
 
   renderExcoTop(D, upd);
@@ -4379,8 +4418,29 @@ function render() {
   ].join('');
 
   var icp = dg.gcc_interceptors_remaining_pct || {};
-  document.getElementById('dmg-intercept').innerHTML =
-    '<div style="font-size:11px;color:var(--text);margin-bottom:10px">'+
+  document.getElementById('dmg-intercept').innerHTML = (function(){
+    var rem = (D.gcc_war_damage && D.gcc_war_damage.gcc_interceptors_remaining_pct) || {};
+    var entries = Object.keys(rem).map(function(k){
+      return { country: k.charAt(0).toUpperCase() + k.slice(1), pct: Number(rem[k]) || 0 };
+    });
+    entries.sort(function(a,b){return a.pct - b.pct;});
+    function pctColor(p){
+      if (p < 20) return '#ef4444';   // red — critical
+      if (p < 40) return '#f59e0b';   // amber — degraded
+      if (p < 60) return '#eab308';   // yellow — depleted
+      return '#22c55e';               // green — holding
+    }
+    return '<div class="dmg-bar-list">'
+      + entries.map(function(e){
+          return '<div class="dmg-bar-row">'
+            +'<div class="dmg-bar-country">'+esc(e.country)+'</div>'
+            +'<div class="dmg-bar-track"><div class="dmg-bar-fill" style="width:'+e.pct+'%;background:'+pctColor(e.pct)+'"></div></div>'
+            +'<div class="dmg-bar-pct" style="color:'+pctColor(e.pct)+'">'+e.pct+'%</div>'
+          +'</div>';
+        }).join('')
+      + '</div>'
+      + '<div style="font-family:var(--body);font-size:11px;color:var(--dim);margin-top:8px;line-height:1.55">Pre-war stockpile '+ (D.gcc_war_damage.gcc_interceptors_pre_war || 'n/a') +' interceptors; '+ (D.gcc_war_damage.gcc_interceptors_expended || 'n/a') +' expended. Replenishment: '+ esc(D.gcc_war_damage.replenishment_timeline || '—') +'</div>';
+  })();color:var(--text);margin-bottom:10px">'+
     esc(dg.cost_exchange_ratio || '')+'</div>'+
     Object.keys(icp).map(function(k){
       var pct = icp[k];
@@ -4705,7 +4765,7 @@ function buildExcoHTML(D) {
   html += '<div class="xhdr">';
   html += '<div class="xhdr-left">'
     +'<div class="xhdr-title">Gulf &amp; Egypt Risk Monitor — EXCO Briefing</div>'
-    +'<div class="xhdr-sub">Operation Epic Fury &nbsp;·&nbsp; Day '+excoEsc(m.day)+' &nbsp;·&nbsp; Intelligence current to '+excoEsc(upd)+'</div>'
+    +'<div class="xhdr-sub">'+excoEsc((m.operation_full || m.operation || 'Operation Epic Fury'))+' &nbsp;·&nbsp; Day '+excoEsc(m.day)+' &nbsp;·&nbsp; Intelligence current to '+excoEsc(upd)+'</div>'
     +'</div>';
   html += '<div class="xhdr-right">'
     +'<div class="x-threat" style="background:'+tlColor+'">'+excoEsc(tl)+'</div>'
@@ -4984,7 +5044,7 @@ function buildExcoHTML(D) {
   }
 
   html += '<div class="xfooter">'
-    +'<span>Gulf &amp; Egypt Risk Monitor — Operation Epic Fury Day '+excoEsc(m.day)+'</span>'
+    +'<span>Gulf &amp; Egypt Risk Monitor — '+excoEsc((m.operation_full || m.operation || 'Operation Epic Fury'))+' Day '+excoEsc(m.day)+'</span>'
     +'<span>Generated from gulf-risk-data.js — no external API calls &nbsp;·&nbsp; '+excoEsc(upd)+'</span>'
     +'</div>';
 
