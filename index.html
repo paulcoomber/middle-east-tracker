@@ -4441,21 +4441,7 @@ function render() {
         }).join('')
       + '</div>'
       + '<div style="font-family:var(--body);font-size:11px;color:var(--dim);margin-top:8px;line-height:1.55">Pre-war stockpile '+ (D.gcc_war_damage.gcc_interceptors_pre_war || 'n/a') +' interceptors; '+ (D.gcc_war_damage.gcc_interceptors_expended || 'n/a') +' expended. Replenishment: '+ esc(D.gcc_war_damage.replenishment_timeline || '—') +'</div>';
-  })();color:var(--text);margin-bottom:10px">'+
-    esc(dg.cost_exchange_ratio || '')+'</div>'+
-    Object.keys(icp).map(function(k){
-      var pct = icp[k];
-      var barColor = pct < 20 ? 'var(--red2)' : pct < 40 ? 'var(--amber)' : 'var(--green)';
-      return '<div style="margin-bottom:8px">'
-        +'<div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">'
-          +'<span style="text-transform:capitalize;color:var(--text)">'+esc(k)+'</span>'
-          +'<span style="color:'+barColor+'">'+pct+'% remaining</span>'
-        +'</div>'
-        +'<div style="background:var(--surface2);border-radius:3px;height:5px">'
-          +'<div style="width:'+pct+'%;height:100%;border-radius:3px;background:'+barColor+'"></div>'
-        +'</div></div>';
-    }).join('')
-    +'<div style="margin-top:10px;font-size:10px;color:var(--dim)">'+esc(dg.replenishment_timeline||'')+'</div>';
+  })();
 
   var energy = dg.energy_infrastructure_struck || [];
   document.getElementById('dmg-energy').innerHTML = energy.map(function(e){return '<li>'+esc(e)+'</li>';}).join('');
