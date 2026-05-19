@@ -1583,7 +1583,7 @@ table{
 
 <div class="page" id="page-exco">
   <div class="card">
-    <div class="card-title">Executive Summary Report <span class="card-upd" id="exco-upd"></span></div>
+    <div class="card-title">EXCO Report — printable executive briefing <span class="card-upd" id="exco-upd"></span></div>
     <div class="exco-buttons-row" style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
       <button class="exco-btn" onclick="window.print()">Print / Save as PDF</button>
       <button class="exco-btn" onclick="printExco()">Download as HTML</button>
@@ -3522,17 +3522,55 @@ Object.assign(window.GULF_RISK_DATA, {
 </script>
 
 <script>
-function showTab(id) {
+function showTab(id, fromHash) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  event.currentTarget.classList.add('active');
+  var page = document.getElementById('page-' + id);
+  if (!page) return;
+  page.classList.add('active');
+  var tabBtns = document.querySelectorAll('.tab');
+  for (var i = 0; i < tabBtns.length; i++) {
+    if (tabBtns[i].getAttribute('onclick') && tabBtns[i].getAttribute('onclick').indexOf("'"+id+"'") !== -1) {
+      tabBtns[i].classList.add('active');
+      break;
+    }
+  }
   if (id === 'exco') {
     var out = document.getElementById('exco-output');
     if (out && !out.querySelector('iframe')) {
       try { generateExco(); } catch(e) { /* swallow */ }
     }
   }
+  if (!fromHash) {
+    try {
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + id);
+      } else {
+        window.location.hash = id;
+      }
+    } catch(e) {}
+  }
+  try { localStorage.setItem('gulf-risk-last-tab', id); } catch(e) {}
+  var content = document.querySelector('.content');
+  if (content) content.scrollTop = 0;
+}
+window.addEventListener('hashchange', function() {
+  var h = (window.location.hash || '').replace(/^#/, '');
+  if (h) showTab(h, true);
+});
+function _bootTabRouting() {
+  var initial = (window.location.hash || '').replace(/^#/, '');
+  if (!initial) {
+    try { initial = localStorage.getItem('gulf-risk-last-tab') || ''; } catch(e) {}
+  }
+  if (initial && document.getElementById('page-' + initial)) {
+    showTab(initial, true);
+  }
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', _bootTabRouting);
+} else {
+  _bootTabRouting();
 }
 
 function esc(s) {
@@ -4023,9 +4061,28 @@ function render() {
       el.textContent = s.short;
     }
   }
-  _renderStatusMbox('brief-cf',  br.ceasefire_short || br.ceasefire_status);
-  _renderStatusMbox('brief-nuc', br.nuclear_short    || br.nuclear_status);
-  _renderStatusMbox('brief-gnd', br.ground_short     || br.ground_op_status);
+  function _deriveShort(longText) {
+    if (!longText) return '';
+    var t = String(longText).trim();
+    t = t.replace(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+\d+\s+\w+\s+\d+:\d+\s*UTC:\s*/i, '');
+    var statusKeywords = /\b(LIFE SUPPORT|PAUSED|ACTIVE|HALTED|RESUMED|STALLED|HOLDING|COLLAPSED|ESCALATING|DE-ESCALATING|FROZEN|BREACHED|HARDENED|SOFTENED|EXTENDED|TERMINATED|ON LIFE SUPPORT)\b/i;
+    var sm = t.match(statusKeywords);
+    if (sm && sm.index > 0 && sm.index < t.length - 8) {
+      t = t.slice(sm.index);
+    }
+    var sentEnd = t.search(/[.;]\s+[A-Z]/);
+    if (sentEnd > 30 && sentEnd < 110) {
+      t = t.slice(0, sentEnd).trim().replace(/[.;:]+$/, '');
+    } else if (t.length > 90) {
+      var cut = t.lastIndexOf(' ', 80);
+      if (cut < 30) cut = 80;
+      t = t.slice(0, cut).trim() + '…';
+    }
+    return t;
+  }
+  _renderStatusMbox('brief-cf',  br.ceasefire_short || _deriveShort(br.ceasefire_status));
+  _renderStatusMbox('brief-nuc', br.nuclear_short    || _deriveShort(br.nuclear_status));
+  _renderStatusMbox('brief-gnd', br.ground_short     || _deriveShort(br.ground_op_status));
 
   (function renderAsideStrip(){
     var strip = document.getElementById('brief-aside-strip');
