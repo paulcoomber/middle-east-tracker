@@ -1741,8 +1741,9 @@ table{
 <div class="page" id="page-travel">
   <div class="card">
     <div class="card-title">Travel Advisories <span class="card-upd" id="tr-upd"></span></div>
-    <div style="font-size:11px;color:var(--amber);margin-bottom:12px;line-height:1.6" id="tr-summary"></div>
     <div class="travel-grid" id="tr-grid"></div>
+    <div class="card-title" style="margin-top:18px;margin-bottom:8px">Regional Narrative</div>
+    <div style="font-size:11px;color:var(--amber);line-height:1.6" id="tr-summary"></div>
   </div>
 </div>
 
@@ -4741,7 +4742,7 @@ function render() {
     return '<div class="travel-card">'
       +'<div class="travel-country">'+esc(country)+'</div>'
       +'<div class="travel-level travel-'+cls+'">'+esc(a.level)+'</div>'
-      +(String(a.notes||'').length>80 ? detailWrap(country+' \u2014 travel', a.notes) : '<div class="travel-notes">'+esc(a.notes||'')+'</div>')
+      +'<div class="travel-notes">'+esc(a.notes||'')+'</div>'
     +'</div>';
   }).join('');
 
