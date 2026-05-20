@@ -1741,9 +1741,8 @@ table{
 <div class="page" id="page-travel">
   <div class="card">
     <div class="card-title">Travel Advisories <span class="card-upd" id="tr-upd"></span></div>
+    <div style="font-size:11px;color:var(--amber);margin-bottom:12px;line-height:1.6" id="tr-summary"></div>
     <div class="travel-grid" id="tr-grid"></div>
-    <div class="card-title" style="margin-top:18px;margin-bottom:8px">Regional Narrative</div>
-    <div style="font-size:11px;color:var(--amber);line-height:1.6" id="tr-summary"></div>
   </div>
 </div>
 
@@ -4733,7 +4732,7 @@ function render() {
 
   var tr = D.travel || {};
   document.getElementById('tr-upd').textContent = ts(tr.updated) || upd;
-  document.getElementById('tr-summary').textContent = tr.summary || '';
+  setDetail('tr-summary', 'Travel \u2014 regional narrative', tr.summary || '');
   var adv = tr.advisories || {};
   var levelMap = {'Do Not Travel':'DNT','Reconsider Travel':'Rec','High Caution':'HC','Exercise Caution':'EC'};
   document.getElementById('tr-grid').innerHTML = Object.keys(adv).map(function(country){
