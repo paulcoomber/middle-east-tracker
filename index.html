@@ -4744,7 +4744,7 @@ function render() {
     return '<div class="travel-card">'
       +'<div class="travel-country">'+esc(country)+'</div>'
       +'<div class="travel-level travel-'+cls+'">'+esc(a.level)+'</div>'
-      +'<div class="travel-notes">'+esc(a.notes||'')+'</div>'
+      +(String(a.notes||'').length>90 ? detailWrap(country+' \u2014 advisory', a.notes) : '<div class="travel-notes">'+esc(a.notes||'')+'</div>')
     +'</div>';
   }).join('');
 
