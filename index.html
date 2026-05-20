@@ -1311,6 +1311,18 @@ table{
   text-align:right;
 }
 
+.detailable{cursor:pointer;position:relative;display:block}
+.detail-teaser{font-family:var(--body);font-size:11px;color:var(--dim);margin-top:var(--s-xs);line-height:1.5;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.detailable:hover .detail-teaser{color:var(--text)}
+.detail-full{display:none}
+.detailable::after{content:'\2922';position:absolute;top:-2px;right:0;font-size:10px;color:var(--dim);opacity:0;transition:opacity .15s}
+.detailable:hover::after{opacity:.75}
+.detail-popover{position:fixed;z-index:9999;width:min(440px,92vw);max-height:52vh;overflow:auto;background:var(--surface2,#15171c);border:1px solid var(--border2,#2a2e37);border-radius:8px;padding:13px 15px;box-shadow:0 10px 34px rgba(0,0,0,.6);display:none}
+.detail-popover.show{display:block}
+.detail-popover-title{font-family:var(--body);font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--amber,#d97706);margin-bottom:8px}
+.detail-popover-body{font-family:var(--body);font-size:11.5px;color:var(--text,#c9ced6);line-height:1.65;white-space:pre-wrap}
+.detail-popover-open{margin-top:11px;font-family:var(--mono);font-size:10.5px;color:var(--bright,#fff);background:var(--border,#23262d);border:1px solid var(--border2,#2a2e37);border-radius:5px;padding:5px 10px;cursor:pointer}
+.detail-popover-open:hover{border-color:var(--amber,#d97706)}
 </style>
 </head>
 <body>
@@ -3723,6 +3735,77 @@ function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function fmt(v) { return v != null ? esc(String(v)) : '—'; }
+function _firstSentence(s){
+  s=String(s==null?'':s).replace(/\s+/g,' ').trim();
+  var m=s.match(/^.*?[.!?](\s|$)/);
+  var t=m?m[0].trim():s;
+  if(t.length>150)t=t.slice(0,147).trim()+'…';
+  return t;
+}
+function detailWrap(title, full){
+  full=String(full==null?'':full);
+  return '<div class="detailable" data-title="'+esc(title)+'">'
+    +'<div class="detail-teaser">'+esc(_firstSentence(full))+'</div>'
+    +'<div class="detail-full">'+esc(full)+'</div>'
+  +'</div>';
+}
+function setDetail(id, title, text){
+  var el=document.getElementById(id); if(!el) return;
+  text=String(text==null?'':text);
+  if(text.replace(/\s+/g,' ').trim().length>90){ el.innerHTML=detailWrap(title, text); }
+  else { el.textContent=text; }
+}
+function openDetail(title, body){
+  try{
+    var id='d'+Date.now()+Math.random().toString(36).slice(2,7);
+    var day=(window.GULF_RISK_DATA&&window.GULF_RISK_DATA._meta&&window.GULF_RISK_DATA._meta.day)||'';
+    localStorage.setItem('gulfDetail:'+id, JSON.stringify({title:title, body:body, day:day, ts:Date.now()}));
+    window.open('detail.html#'+id, '_blank');
+  }catch(err){ console.error('openDetail failed', err); }
+}
+function _initDetailPopover(){
+  if(window._detailInit) return; window._detailInit=true;
+  var pop=document.createElement('div');
+  pop.className='detail-popover';
+  pop.innerHTML='<div class="detail-popover-title"></div><div class="detail-popover-body"></div><button class="detail-popover-open" type="button">Open full view ↗</button>';
+  document.body.appendChild(pop);
+  var curTitle='', curBody='', hideTimer=null;
+  function scheduleHide(){ clearTimeout(hideTimer); hideTimer=setTimeout(function(){ pop.classList.remove('show'); },150); }
+  function cancelHide(){ clearTimeout(hideTimer); }
+  function show(el){
+    cancelHide();
+    curTitle=el.getAttribute('data-title')||'';
+    var bodyEl=el.querySelector('.detail-full');
+    curBody=bodyEl?bodyEl.textContent:'';
+    pop.querySelector('.detail-popover-title').textContent=curTitle;
+    pop.querySelector('.detail-popover-body').textContent=curBody;
+    pop.classList.add('show');
+    var r=el.getBoundingClientRect();
+    var pw=pop.offsetWidth, ph=pop.offsetHeight;
+    var left=Math.min(r.left, window.innerWidth-pw-12); if(left<8)left=8;
+    var top=r.bottom+8; if(top+ph>window.innerHeight-8) top=Math.max(8, r.top-ph-8);
+    pop.style.left=left+'px'; pop.style.top=top+'px';
+  }
+  document.addEventListener('mouseover', function(e){
+    var el=e.target.closest?e.target.closest('.detailable'):null;
+    if(el) show(el);
+  });
+  document.addEventListener('mouseout', function(e){
+    var el=e.target.closest?e.target.closest('.detailable'):null;
+    if(!el) return;
+    var to=e.relatedTarget;
+    if(to&&to.closest&&(to.closest('.detailable')===el||to.closest('.detail-popover'))) return;
+    scheduleHide();
+  });
+  pop.addEventListener('mouseenter', cancelHide);
+  pop.addEventListener('mouseleave', scheduleHide);
+  document.addEventListener('click', function(e){
+    if(e.target.closest&&e.target.closest('.detail-popover')) return;
+    var el=e.target.closest?e.target.closest('.detailable'):null;
+    if(el) openDetail(el.getAttribute('data-title')||'', (el.querySelector('.detail-full')||{textContent:''}).textContent||'');
+  });
+  pop.querySelector('.detail-popover-open').addEventListener('click', function(){ openDetail(curTitle, curBody); });
+}
 function xspark(label, val, delta_text, delta_dir, sub) {
   var dpart = '';
   if (delta_text) {
@@ -3732,14 +3815,14 @@ function xspark(label, val, delta_text, delta_dir, sub) {
   return '<div class="xspark-card">'
     +'<div class="xspark-label">'+label+'</div>'
     +'<div class="xspark-val">'+(val==null||val===''?'—':val)+dpart+'</div>'
-    +(sub?'<div class="xspark-sub">'+sub+'</div>':'')
+    +(sub?(String(sub).length>80?detailWrap(label,sub):'<div class="xspark-sub">'+esc(sub)+'</div>'):'')
   +'</div>';
 }
 
 function mbox(label, val, cls, sub) {
   return '<div class="mbox"><div class="mbox-label">'+esc(label)+'</div>'
     +'<div class="mbox-val '+(cls||'')+'">'+(val != null ? esc(String(val)) : '—')+'</div>'
-    +(sub ? '<div class="mbox-sub">'+esc(sub)+'</div>' : '')
+    +(sub ? (String(sub).length>80?detailWrap(label,sub):'<div class="mbox-sub">'+esc(sub)+'</div>') : '')
     +'</div>';
 }
 function srow(label, val, cls) {
@@ -4295,7 +4378,7 @@ function render() {
     xspark('Egypt bonds',   '+'+(mx.egypt_bond_spread_bps||'—')+'bps', '', '', 'Spread over UST'),
     xspark('Hormuz transit',(D.hormuz && D.hormuz.ships_monday)||'—', '', '', 'Ships Mon — pre-war ~50')
   ].join('');
-  document.getElementById('mkt-notes').textContent = mx.brent_spot_note || '';
+  setDetail('mkt-notes', 'Brent — spot market notes', mx.brent_spot_note || '');
   document.getElementById('mkt-notes-upd').textContent = ts(mx.updated) || upd;
 
   var cs = D.chart_series || {};
@@ -4374,18 +4457,18 @@ function render() {
   document.getElementById('nuc-bars').innerHTML =
     '<div class="nuc-bar-wrap"><div class="nuc-bar-label"><span>Enrichment level (60% confirmed)</span><span>90% = weapons-grade</span></div><div class="nuc-bar-bg"><div class="nuc-bar-fill" style="width:67%"></div></div></div>'
     +'<div class="nuc-bar-wrap"><div class="nuc-bar-label"><span>IAEA visibility</span><span>Lost centrifuge mfg access Feb 2021</span></div><div class="nuc-bar-bg"><div class="nuc-bar-fill" style="width:85%;background:var(--red2)"></div></div></div>';
-  document.getElementById('nuc-covert').textContent =
-    (nu.covert_programme||'') + '\n\nRussian assistance: ' + (nu.russian_assistance||'') + '\n\nChina: ' + (nu.china_assistance||'');
-  document.getElementById('nuc-iaea').textContent = nu.iaea_access || '';
-  document.getElementById('nuc-us-pos').textContent = nu.us_demand || '';
-  document.getElementById('nuc-iran-pos').textContent = nu.iran_position || '';
-  document.getElementById('nuc-gap').textContent = nu.key_gap || '';
-  document.getElementById('nuc-verdict').textContent = nu.proliferation_verdict || '';
+  setDetail('nuc-covert', 'Covert programme & foreign assistance',
+    (nu.covert_programme||'') + '\n\nRussian assistance: ' + (nu.russian_assistance||'') + '\n\nChina: ' + (nu.china_assistance||''));
+  setDetail('nuc-iaea', 'IAEA access', nu.iaea_access || '');
+  setDetail('nuc-us-pos', 'US position', nu.us_demand || '');
+  setDetail('nuc-iran-pos', 'Iran position', nu.iran_position || '');
+  setDetail('nuc-gap', 'Key gap', nu.key_gap || '');
+  setDetail('nuc-verdict', 'Proliferation verdict', nu.proliferation_verdict || '');
 
   var go = D.ground_ops || {};
   document.getElementById('gnd-upd').textContent = ts(go.updated) || upd;
   document.getElementById('gnd-total').textContent = go.us_forces_total || '—';
-  document.getElementById('gnd-status').textContent = go.status || '—';
+  setDetail('gnd-status', 'Ground forces — status', go.status || '—');
 
   var forceRows = D.force_table || go.forces_deployed || [];
   document.getElementById('gnd-tbody').innerHTML = forceRows.map(function(r){
@@ -4406,8 +4489,8 @@ function render() {
       +(t.key_unknown ? '<div style="font-size:11px;color:var(--amber);margin-top:5px"><strong>Key unknown:</strong> '+esc(t.key_unknown)+'</div>' : '')
     +'</div>';
   }).join('');
-  document.getElementById('gnd-expert').textContent = go.expert_consensus || '';
-  document.getElementById('gnd-iraq').textContent = go.iraq_comparison || '';
+  setDetail('gnd-expert', 'Expert consensus', go.expert_consensus || '');
+  setDetail('gnd-iraq', 'Iraq comparison', go.iraq_comparison || '');
 
   var dg = D.gcc_war_damage || {};
   document.getElementById('dmg-upd').textContent = ts(dg.updated) || upd;
@@ -5583,6 +5666,7 @@ function renderSources() {
       });
   }
 
+  _initDetailPopover();
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);
   } else {
