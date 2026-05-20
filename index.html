@@ -1331,6 +1331,11 @@ table{
 .detail-win-btitle{font-family:var(--body);font-size:14px;font-weight:600;color:var(--amber,#e0922f);margin-bottom:11px}
 .detail-win-body{font-family:var(--body);font-size:12.5px;line-height:1.7;color:var(--text,#c9ced6);white-space:pre-wrap}
 @media (max-width:560px){.detail-win-list{flex-basis:128px}}
+
+.chart-range-bar{display:flex;gap:6px;margin:0 0 12px;flex-wrap:wrap}
+.chart-range-btn{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 12px;cursor:pointer;transition:all .12s}
+.chart-range-btn:hover{color:var(--text);border-color:var(--border2)}
+.chart-range-btn.active{color:#11141a;background:var(--amber);border-color:var(--amber);font-weight:600}
 </style>
 </head>
 <body>
@@ -1525,6 +1530,13 @@ table{
   <div class="card">
     <div class="card-title">Market Metrics <span class="card-upd" id="mkt-upd"></span></div>
     <div class="grid4" id="mkt-boxes"></div>
+  </div>
+  <div class="chart-range-bar" id="chart-range-bar">
+    <span style="font-family:var(--mono);font-size:10.5px;color:var(--dim);align-self:center;margin-right:4px;letter-spacing:.05em">RANGE</span>
+    <button class="chart-range-btn active" data-r="all" type="button">All</button>
+    <button class="chart-range-btn" data-r="90d" type="button">90d</button>
+    <button class="chart-range-btn" data-r="30d" type="button">30d</button>
+    <button class="chart-range-btn" data-r="7d" type="button">7d</button>
   </div>
   <div class="chart-grid2">
     <div class="card">
@@ -2772,12 +2784,13 @@ Object.assign(window.GULF_RISK_DATA, {
   },
 
   chart_series: {
-    labels: ["28 Jan","4 Feb","11 Feb","18 Feb","25 Feb","28 Feb","4 Mar","11 Mar","18 Mar","25 Mar","1 Apr","4 Apr","7 Apr","8 Apr","10 Apr","13 Apr","14 Apr","15 Apr","17 Apr","18 Apr","20 Apr","21 Apr","22 Apr","23 Apr","24 Apr","25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","1 May","2 May","3 May","4 May","5 May","6 May","7 May","8 May"],
-    brent:         [70,   68,   67,    67.5,  69,    72,    85,   110,  118,   112,   108,   111,  109,  91,   96,    103,   95,    99,    88,    96,    97,    95.22, 93.80, 96.50, 101.40, 105.33, 105.33, 108.11, 111.16, 118.03, 114.22, 108.10, 108.94, 108.17, 114.77, 113.41, 108.09, 101.96, 100.54],
-    egp:           [47.2, 47.5, 47.8,  48.2,  48.9,  49.5,  51.2, 52.8, 53.5,  53.9,  54.1,  54.5, 54.62,54.69,54.25, 53.37, 53.09, 52.50, 51.92, 51.80, 51.75, 51.73, 51.75, 52.05, 52.62, 52.62, 52.62, 52.55, 52.84, 52.82, 53.73, 53.62, 53.52, 53.64, 53.55, 53.53, 53.62, 52.72, 52.72],
-    hormuz:        [54,   53,   52,    50,    48,    48,    42,   38,   40,    35,    30,    28,   22,   25,   20,    5,     8,     12,    14,    16,    16,    3,     5,     4,     5,     3,     4,     4,     4,     6,     20,    7,     12,    7,     7,     4,     11,    11, 11],
-    suez:          [32,   32,   31,    30,    30,    29,    26,   24,   23,    22,    21,    20,   20,   20,   19,    18,    18,    20,    19,    21,    22,    22,    23,    23,    22,    20,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19, 19],
-    bab_el_mandeb: [16,   15,   15,    14,    13,    12,    10,   9,    8,     7,     7,     6,    6,    5,    5,     4,     4,     4,     3,     4,     5,     5,     5,     5,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4],
+    dates: ["2026-01-28T18:00:00.000Z", "2026-02-04T18:00:00.000Z", "2026-02-11T18:00:00.000Z", "2026-02-18T18:00:00.000Z", "2026-02-25T18:00:00.000Z", "2026-02-28T18:00:00.000Z", "2026-03-04T18:00:00.000Z", "2026-03-11T18:00:00.000Z", "2026-03-18T18:00:00.000Z", "2026-03-25T18:00:00.000Z", "2026-04-01T18:00:00.000Z", "2026-04-04T18:00:00.000Z", "2026-04-07T18:00:00.000Z", "2026-04-08T18:00:00.000Z", "2026-04-10T18:00:00.000Z", "2026-04-13T18:00:00.000Z", "2026-04-14T18:00:00.000Z", "2026-04-15T18:00:00.000Z", "2026-04-17T18:00:00.000Z", "2026-04-18T18:00:00.000Z", "2026-04-20T18:00:00.000Z", "2026-04-21T18:00:00.000Z", "2026-04-22T18:00:00.000Z", "2026-04-23T18:00:00.000Z", "2026-04-24T18:00:00.000Z", "2026-04-25T18:00:00.000Z", "2026-04-26T18:00:00.000Z", "2026-04-27T18:00:00.000Z", "2026-04-28T18:00:00.000Z", "2026-04-29T18:00:00.000Z", "2026-04-30T18:00:00.000Z", "2026-05-01T18:00:00.000Z", "2026-05-02T18:00:00.000Z", "2026-05-03T18:00:00.000Z", "2026-05-04T18:00:00.000Z", "2026-05-05T18:00:00.000Z", "2026-05-06T18:00:00.000Z", "2026-05-07T18:00:00.000Z", "2026-05-08T18:00:00.000Z", "2026-05-17T18:00:00.000Z", "2026-05-18T18:00:00.000Z", "2026-05-19T18:00:00.000Z", "2026-05-20T18:00:00.000Z"],
+    labels: ["28 Jan","4 Feb","11 Feb","18 Feb","25 Feb","28 Feb","4 Mar","11 Mar","18 Mar","25 Mar","1 Apr","4 Apr","7 Apr","8 Apr","10 Apr","13 Apr","14 Apr","15 Apr","17 Apr","18 Apr","20 Apr","21 Apr","22 Apr","23 Apr","24 Apr","25 Apr","26 Apr","27 Apr","28 Apr","29 Apr","30 Apr","1 May","2 May","3 May","4 May","5 May","6 May","7 May","8 May", "17 May", "18 May", "19 May", "20 May"],
+    brent: [70,   68,   67,    67.5,  69,    72,    85,   110,  118,   112,   108,   111,  109,  91,   96,    103,   95,    99,    88,    96,    97,    95.22, 93.80, 96.50, 101.40, 105.33, 105.33, 108.11, 111.16, 118.03, 114.22, 108.10, 108.94, 108.17, 114.77, 113.41, 108.09, 101.96, 100.54, 113.21, 107.85, 109.40, 110.34],
+    egp: [47.2, 47.5, 47.8,  48.2,  48.9,  49.5,  51.2, 52.8, 53.5,  53.9,  54.1,  54.5, 54.62,54.69,54.25, 53.37, 53.09, 52.50, 51.92, 51.80, 51.75, 51.73, 51.75, 52.05, 52.62, 52.62, 52.62, 52.55, 52.84, 52.82, 53.73, 53.62, 53.52, 53.64, 53.55, 53.53, 53.62, 52.72, 52.72, 52.835, 53.360, 53.360, 53.285],
+    hormuz: [54,   53,   52,    50,    48,    48,    42,   38,   40,    35,    30,    28,   22,   25,   20,    5,     8,     12,    14,    16,    16,    3,     5,     4,     5,     3,     4,     4,     4,     6,     20,    7,     12,    7,     7,     4,     11,    11, 11, 8, 8, 8, 9],
+    suez: [32,   32,   31,    30,    30,    29,    26,   24,   23,    22,    21,    20,   20,   20,   19,    18,    18,    20,    19,    21,    22,    22,    23,    23,    22,    20,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19,    19, 19, 19, 19, 19, 19],
+    bab_el_mandeb: [16,   15,   15,    14,    13,    12,    10,   9,    8,     7,     7,     6,    6,    5,    5,     4,     4,     4,     3,     4,     5,     5,     5,     5,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4,     4, 4, 4, 4, 4],
     war_start_index: 5,
     brent_min: 60,  brent_max: 125,
     egp_min:   45,  egp_max:   57,
@@ -3825,6 +3838,57 @@ function _initDetailWindow(){
     if(el) openDetail(el.getAttribute('data-title')||'');
   });
 }
+function _chartDateMs(cs){
+  if(cs.dates && cs.dates.length) return cs.dates.map(function(d){ return Date.parse(d); });
+  return (cs.labels||[]).map(function(l){ return Date.parse(String(l)+' 2026'); });
+}
+function _sliceByRange(cs, rangeKey){
+  var n=(cs.labels||[]).length;
+  if(rangeKey==='all' || n===0) return {from:0,to:n};
+  var days={'90d':90,'30d':30,'7d':7}[rangeKey];
+  if(!days) return {from:0,to:n};
+  var dms=_chartDateMs(cs), lastMs=NaN, j;
+  for(j=n-1;j>=0;j--){ if(!isNaN(dms[j])){ lastMs=dms[j]; break; } }
+  if(isNaN(lastMs)) lastMs=Date.now();
+  var cutoff=lastMs - days*86400000, from=n, i;
+  for(i=0;i<n;i++){ if(!isNaN(dms[i]) && dms[i]>=cutoff){ from=i; break; } }
+  if(from>=n) from=Math.max(0,n-1);
+  return {from:from,to:n};
+}
+function _autoMinMax(arr, defMin, defMax){
+  var vals=arr.filter(function(v){ return typeof v==='number' && !isNaN(v); });
+  if(vals.length<2) return [defMin, defMax];
+  var lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals);
+  var pad=(hi-lo)*0.08; if(pad<=0) pad=Math.abs(hi)*0.02||1;
+  return [lo-pad, hi+pad];
+}
+function _freshCanvas(id){
+  var c=document.getElementById(id);
+  if(c && c.parentNode){ var nn=c.cloneNode(false); c.parentNode.replaceChild(nn,c); }
+}
+function renderMarketCharts(rangeKey){
+  var D=window.GULF_RISK_DATA||{}, cs=D.chart_series||{};
+  var r=_sliceByRange(cs, rangeKey);
+  var lab=(cs.labels||[]).slice(r.from,r.to);
+  function sl(a){ return (a||[]).slice(r.from,r.to); }
+  var zoom=(rangeKey && rangeKey!=='all');
+  function mm(arr,dmin,dmax){ return zoom?_autoMinMax(arr,dmin,dmax):[dmin,dmax]; }
+  var series=[
+    ['brent-chart', sl(cs.brent), 'rgb(239,68,68)',  cs.brent_min||60, cs.brent_max||125],
+    ['egp-chart',   sl(cs.egp),   'rgb(234,179,8)',  cs.egp_min||45,   cs.egp_max||57],
+    ['hormuz-chart',sl(cs.hormuz),'rgb(59,130,246)', cs.hormuz_min||0, cs.hormuz_max||60],
+    ['suez-chart',  sl(cs.suez),  'rgb(34,197,94)',  cs.suez_min||0,   cs.suez_max||40],
+    ['bem-chart',   sl(cs.bab_el_mandeb),'rgb(168,85,247)', cs.bem_min||0, cs.bem_max||20]
+  ];
+  series.forEach(function(s){
+    var data=s[1]; if(!data || !data.length) return;
+    var rng=mm(data, s[3], s[4]);
+    _freshCanvas(s[0]);
+    drawSpark(s[0], data, s[2], rng[0], rng[1], lab);
+  });
+  var btns=document.querySelectorAll('.chart-range-btn');
+  for(var k=0;k<btns.length;k++){ btns[k].classList.toggle('active', btns[k].getAttribute('data-r')===rangeKey); }
+}
 function xspark(label, val, delta_text, delta_dir, sub) {
   var dpart = '';
   if (delta_text) {
@@ -4409,11 +4473,18 @@ function render() {
     if (sn) sn.textContent = cs.source_note;
   }
   setTimeout(function(){
-    if (brentData.length) drawSpark('brent-chart', brentData, 'rgb(239,68,68)', cs.brent_min||60, cs.brent_max||125, xlabels, cs.war_start_index||6);
-    if (egpData.length)   drawSpark('egp-chart',   egpData,   'rgb(234,179,8)', cs.egp_min||45,   cs.egp_max||57,   xlabels, cs.war_start_index||6);
-    if (cs.hormuz && cs.hormuz.length)         drawSpark('hormuz-chart', cs.hormuz,        'rgb(59,130,246)',  cs.hormuz_min||0, cs.hormuz_max||60, xlabels, cs.war_start_index||6);
-    if (cs.suez && cs.suez.length)             drawSpark('suez-chart',   cs.suez,          'rgb(34,197,94)',   cs.suez_min||0,   cs.suez_max||40,   xlabels, cs.war_start_index||6);
-    if (cs.bab_el_mandeb && cs.bab_el_mandeb.length) drawSpark('bem-chart', cs.bab_el_mandeb, 'rgb(168,85,247)', cs.bem_min||0,   cs.bem_max||20,    xlabels, cs.war_start_index||6);
+    var savedRange='all'; try{ savedRange=localStorage.getItem('gulf-chart-range')||'all'; }catch(e){}
+    renderMarketCharts(savedRange);
+    if(!window._chartRangeBound){
+      window._chartRangeBound=true;
+      var bar=document.getElementById('chart-range-bar');
+      if(bar) bar.addEventListener('click', function(ev){
+        var b=ev.target.closest?ev.target.closest('.chart-range-btn'):null; if(!b) return;
+        var rk=b.getAttribute('data-r');
+        try{ localStorage.setItem('gulf-chart-range', rk); }catch(e){}
+        renderMarketCharts(rk);
+      });
+    }
   }, 50);
 
   var wl = D.watchlist || {};
