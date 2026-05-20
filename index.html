@@ -1336,6 +1336,9 @@ table{
 .chart-range-btn{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:5px 12px;cursor:pointer;transition:all .12s}
 .chart-range-btn:hover{color:var(--text);border-color:var(--border2)}
 .chart-range-btn.active{color:#11141a;background:var(--amber);border-color:var(--amber);font-weight:600}
+
+.detail-link{display:inline-block;font-family:var(--mono);font-size:11px;color:var(--amber);background:var(--surface2);border:1px solid var(--border);border-radius:5px;padding:6px 12px;cursor:pointer}
+.detail-link:hover{border-color:var(--amber);color:var(--bright)}
 </style>
 </head>
 <body>
@@ -4732,7 +4735,7 @@ function render() {
 
   var tr = D.travel || {};
   document.getElementById('tr-upd').textContent = ts(tr.updated) || upd;
-  setDetail('tr-summary', 'Travel \u2014 regional narrative', tr.summary || '');
+  (function(){ var _s=tr.summary||''; var _el=document.getElementById('tr-summary'); if(!_el) return; if(_s){ _regDetail('Travel \u2014 regional narrative', _s); _el.innerHTML='<div class="detailable detail-link" data-title="Travel \u2014 regional narrative">Regional narrative \u2014 click to open \u2197</div>'; } else { _el.textContent=''; } })();
   var adv = tr.advisories || {};
   var levelMap = {'Do Not Travel':'DNT','Reconsider Travel':'Rec','High Caution':'HC','Exercise Caution':'EC'};
   document.getElementById('tr-grid').innerHTML = Object.keys(adv).map(function(country){
