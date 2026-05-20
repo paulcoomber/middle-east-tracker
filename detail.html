@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detail — Gulf &amp; Egypt Risk Monitor</title>
+<style>
+  :root{
+    --bg:#0d0f13; --surface:#13161b; --surface2:#15171c; --border:#23262d; --border2:#2a2e37;
+    --text:#c9ced6; --dim:#8b919c; --bright:#ffffff; --amber:#e0922f; --red:#ef4444;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body)}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 22px 60px}
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:22px}
+  .brand{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+  .back{font-family:var(--mono);font-size:11.5px;color:var(--text);text-decoration:none;border:1px solid var(--border2);border-radius:6px;padding:6px 11px;white-space:nowrap}
+  .back:hover{border-color:var(--amber);color:var(--bright)}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.05em;color:var(--dim);margin-bottom:6px}
+  h1{font-family:var(--body);font-size:22px;font-weight:600;color:var(--amber);margin:0 0 18px;letter-spacing:.02em}
+  .body{font-size:14.5px;line-height:1.75;color:var(--text);white-space:pre-wrap}
+  .empty{color:var(--dim);font-size:13px;line-height:1.7}
+  .empty a{color:var(--amber)}
+  .ts{margin-top:26px;padding-top:14px;border-top:1px solid var(--border);font-family:var(--mono);font-size:10.5px;color:var(--dim)}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <span class="brand">Gulf &amp; Egypt Risk Monitor</span>
+      <a class="back" href="./index.html">&larr; Back to dashboard</a>
+    </div>
+    <div id="kicker" class="kicker"></div>
+    <h1 id="title">Detail</h1>
+    <div id="body" class="body"></div>
+    <div id="ts" class="ts"></div>
+  </div>
+<script>
+(function(){
+  function read(){
+    var id = (location.hash || '').replace(/^#/, '').trim();
+    if(!id) return null;
+    try { return JSON.parse(localStorage.getItem('gulfDetail:' + id) || 'null'); }
+    catch(e){ return null; }
+  }
+  var d = read();
+  var titleEl = document.getElementById('title');
+  var bodyEl  = document.getElementById('body');
+  var kickEl  = document.getElementById('kicker');
+  var tsEl    = document.getElementById('ts');
+  if(!d || (!d.title && !d.body)){
+    titleEl.textContent = 'No detail to show';
+    bodyEl.className = 'empty';
+    bodyEl.innerHTML = 'This page opens a focused view of a metric you click on the dashboard. '
+      + 'Open it from there, or <a href="./index.html">return to the dashboard</a>.';
+    document.title = 'Detail — Gulf & Egypt Risk Monitor';
+    return;
+  }
+  if(d.day) kickEl.textContent = 'Day ' + d.day;
+  titleEl.textContent = d.title || 'Detail';
+  bodyEl.textContent  = d.body || '';
+  document.title = (d.title || 'Detail') + ' — Gulf Risk Monitor';
+  if(d.ts){
+    try { tsEl.textContent = 'Captured ' + new Date(d.ts).toLocaleString('en-GB', {day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',timeZone:'UTC'}) + ' UTC'; }
+    catch(e){}
+  }
+})();
+</script>
+</body>
+</html>
