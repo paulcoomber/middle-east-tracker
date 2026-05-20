@@ -1744,7 +1744,7 @@ table{
 <div class="page" id="page-travel">
   <div class="card">
     <div class="card-title">Travel Advisories <span class="card-upd" id="tr-upd"></span></div>
-    <div style="font-size:11px;color:var(--amber);margin-bottom:12px;line-height:1.6" id="tr-summary"></div>
+    <div style="margin-bottom:12px" id="tr-summary"></div>
     <div class="travel-grid" id="tr-grid"></div>
   </div>
 </div>
@@ -4735,7 +4735,7 @@ function render() {
 
   var tr = D.travel || {};
   document.getElementById('tr-upd').textContent = ts(tr.updated) || upd;
-  (function(){ var _s=tr.summary||''; var _el=document.getElementById('tr-summary'); if(!_el) return; if(_s){ _regDetail('Travel \u2014 regional narrative', _s); _el.innerHTML='<div class="detailable detail-link" data-title="Travel \u2014 regional narrative">Regional narrative \u2014 click to open \u2197</div>'; } else { _el.textContent=''; } })();
+  (function(){ var _s=tr.summary||''; var _el=document.getElementById('tr-summary'); if(!_el) return; if(_s){ _el.innerHTML='<div class="xspark-card" style="max-width:480px"><div class="xspark-label">Regional Narrative</div>'+detailWrap('Travel \u2014 regional narrative', _s)+'</div>'; } else { _el.textContent=''; } })();
   var adv = tr.advisories || {};
   var levelMap = {'Do Not Travel':'DNT','Reconsider Travel':'Rec','High Caution':'HC','Exercise Caution':'EC'};
   document.getElementById('tr-grid').innerHTML = Object.keys(adv).map(function(country){
