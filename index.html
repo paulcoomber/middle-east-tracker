@@ -1856,14 +1856,15 @@ Object.assign(window.GULF_RISK_DATA, {
     russia_offer: "Russia offered to hold Iran's enriched uranium — confirmed as part of negotiations. Iran's Foreign Minister Araghchi offered to down-blend or transfer material to a third country on 15 March CBS interview. US rejected partial measures, demands full dismantlement.",
     us_demand: "Trump 8 Apr: 'There will be no enrichment of uranium and the United States will, working with Iran, dig up and remove all of the deeply buried Nuclear Dust.' Zero enrichment. Full dismantlement. Wed 29 Apr Axios: 'I don’t want them to have a nuclear weapon... blockade is somewhat more effective than the bombing'.",
     iran_position: "5-year enrichment pause (rejected by US which demanded 20-year pause). Sovereignty over Strait. War reparations. Security guarantees. Recognition as regional power. April 2026 Pakistan-mediated proposal: postpone nuclear talks to later stage — rejected by Trump 29 Apr.",
-    key_gap: "US demands 20-year enrichment pause plus full dismantlement. Iran offered 5 years. This gap has not narrowed. Nuclear material question is the hardest issue — it is why ground operations targeting uranium are under active planning.",
-    iaea_access: "ALL IAEA access in Iran terminated 28 Feb 2026 (war start). Cameras disabled, seals removed across declared facilities. Inspectors only at non-attacked sites: Bushehr, Tehran Research Reactor, labs. No access to any of Iran's four declared enrichment facilities since June 2025 strikes. New declared underground enrichment site at Isfahan (declared by Iran to IAEA in June 2025) has NEVER been inspected — as of Mar 2026 IAEA does not know whether centrifuges have been installed (Grossi: 'None' on evidence of an enrichment facility at the site). NEW (29 Apr 2026, AP interview): Grossi told the AP that ~200kg of Iran's 60% HEU 'likely remains' at Isfahan since June 2025; the IAEA seals were never broken, but inspectors have not verified. Airbus satellite imagery shows 18 blue containers (assessed as containing the HEU stockpile) entering an Isfahan tunnel on 9 June 2025, just before the start of the June 2025 12-day war. Grossi (15 Apr): resumption of inspections is prerequisite for any negotiated settlement.",
+    key_gap: "US demands (20-year enrichment pause plus dismantlement) versus Iran's 5-year offer were set in spring and were NOT re-sourced on 11 Oct. The verification gap is unchanged: no one outside Iran knows where the 60% material is.",
+    review_note_11oct: "Only iaea_access and key_gap were refreshed on 11 Oct. Covert-programme, Russian and Chinese assistance, enrichment_status, offers and verdict fields date from April to May and were not re-verified.",
+    iaea_access: "11 Oct review. IAEA (restricted report to member states, 3 Sep 2026, via Kurdistan24): the agency cannot verify the location or condition of Iran's 440.9 kg of 60% enriched uranium, has 'lost continuity of knowledge' of the inventories for more than a year, and calls the lack of access a matter of proliferation concern; no progress restoring verification. Inspectors have not returned to the sites bombed in June 2025; a Bushehr visit was expected mid-September. The IAEA Board voted 23-3 to report Iran to the UN Security Council (Russia and China opposed) - a single-source tally, see metrics note. Pickaxe Mountain (CSIS imagery analysis, Gulf News, 10 Sep): 2026 construction is the highest in six years of imagery, with access points reinforced and tunnelling continuing; CSIS says it cannot confirm the Israeli claim that centrifuges were moved in, and the site does not currently look like an operating enrichment plant. Earlier detail on the Isfahan tunnel (Grossi, 29 Apr: about 200 kg likely remains there, seals unbroken, unverified) was not re-checked and is retained as background.",
     proliferation_verdict: "Iran does not have a deployable nuclear weapon. It has: the material (~200kg of 60% HEU likely still at Isfahan since June 2025 per Grossi to AP 29 Apr — enough for as many as 10 bombs if weaponised; total declared stockpile 440.9kg), the knowledge (covert weaponisation research confirmed at 3 sites, SPND active), the Russian assistance (Nov 2024 confirmed; April 2026 Putin-Araghchi reinforced), the centrifuge capacity (unknown — blind since 2021), and the political authorisation (Khamenei signed off miniaturised warhead development Oct 2025, before his death). The assembly question remains genuinely uncertain. Iran's Mon 27 Apr 2026 formal proposal would POSTPONE nuclear talks to 'a later stage' — Trump formally rejected that decoupling 29 Apr in Axios phone interview ('blockade is somewhat more effective than the bombing'). Rubio softened slightly but anchored on a deal that 'definitively prevents them from sprinting to a nuclear weapon at any point'. Bulletin of Atomic Scientists: this war has fundamentally undermined the NPT.",
-    updated: "2026-04-29T20:30:00.000Z"
+    updated: "2026-10-11T22:20:00.000Z"
   },
 
   capital_flight: {
-    note: "No authoritative real-time aggregate figure exists. Pre-war IIF baseline: $271B net resident outflows in 2025. War-period estimates are analytical extrapolations not sourced aggregates.",
+    note: "11 Oct review: not refreshed. No authoritative aggregate exists; search found only commentary (wealthy Asian clients moving Dubai assets closer to home, Mar; private-banker reports) and no sourced war-period outflow figure. Pre-war IIF baseline: $271B net resident outflows in 2025. Corporate relocation list below dates from April and is unverified since.",
     pre_war_iif_bn: 271,
     estimated_war_period_additional_bn: "Unknown — corporate relocations documented case by case, private wealth flows not aggregated in real time",
     corporate_relocations_documented: [
@@ -1882,7 +1883,7 @@ Object.assign(window.GULF_RISK_DATA, {
   trust_index: {
     priority: "HIGH",
     display_order: "ELEVATED",
-    label_caveat: "DIRECTION TRACKER, not a calibrated index. Numbers reflect analyst judgment scored against five named signals per axis. Treat the trajectory as the signal; do not over-interpret the absolute level.",
+    label_caveat: "STALE: the monthly series ends May 2026; June to October have NOT been scored, so the chart is five months behind. DIRECTION TRACKER, not a calibrated index. Numbers reflect analyst judgment scored against five named signals per axis. Treat the trajectory as the signal; do not over-interpret the absolute level.",
     description: "Monthly direction tracker for foreign-counterparty trust in Egypt, since Q1 2026. Five signals per axis (commitments honoured, capital flows, deposits, military cooperation, diplomatic alignment) each scored 0-20; sum = 0-100 figure. Direction matters more than absolute level.",
     methodology: "Five signals per axis, each scored 0-20 by analyst judgment, summed for a 0-100 figure. Signals defined under signals_by_party. CONVENTION: higher signal score = MORE TRUST on that signal; lower = LESS TRUST. Signal score INCREASE means that signal improved (e.g., risk defused, fresh commitment landed); DECREASE means that signal deteriorated (e.g., fresh threat surfaced, commitment slipped). Subjective — score against narrative facts, not market data. Flag for replacement with quantitative composite (e.g. CDS, deposit balances, FDI flows) when those are available consistently across the three axes.",
     review_cadence: "Monthly — first business day of each month, with mid-month update if a load-bearing signal flips (e.g. Kuwaiti deposit pull, IMF program suspension, fresh Gulf commitment).",
@@ -1945,8 +1946,8 @@ Object.assign(window.GULF_RISK_DATA, {
         headline: "IMF EFF reform compliance",
         promised: "Egypt committed under EFF to: subsidy reform, FX flexibility, privatization, debt reduction, fiscal consolidation.",
         historical: "5th and 6th reviews COMBINED in Feb 2026 because Egypt was running behind schedule. Each prior review delayed except the 1st.",
-        actual: "Apr 23 budget draft shows energy subsidies down (compliant) BUT export subsidies UP (rolling-back of subsidy logic for elite capture). Privatization frozen 'while war ongoing' (Mada Masr Apr 1). FX 'flexibility' is cosmetic given 19% policy rate + intervention.",
-        break_probability: "MEDIUM. Program continues nominally but real reform compliance deteriorating. June review likely produces softer waivers. Risk of program suspension low near-term but rising into H2 2026."
+        actual: "Apr: energy subsidies down but export subsidies up; privatisation frozen. UPDATE 11 Oct: IMF said in July that SOE / state-role reform 'progressed more slowly than anticipated' (asset sales about $520m); the 7th review completed 30 Jul; the final EFF review plus a third RSF review (about $2.3bn) are due Oct-Dec; PM Madbouly (about 4 Oct) says Egypt needs no new programme. FX 'flexibility' remains largely managed.",
+        break_probability: "MEDIUM-HIGH. The programme ends with SOE reform incomplete and Cairo declining a successor. Risk now sits in the final review (slippage would cost the $2.3bn) and in the loss of the external anchor in Q1 2027. Read on motive: a signalling bluff to avoid external validation (judgement)."
       },
       {
         id: "egp_managed_floating",
@@ -1973,14 +1974,14 @@ Object.assign(window.GULF_RISK_DATA, {
         break_probability: "LOW. Scheduled hikes will continue. Political timing may shift. Pump-feed inflation builds."
       }
     ],
-    updated: "2026-04-29T21:28:06.000Z"
+    updated: "2026-10-11T22:20:00.000Z"
   },
 
   egypt_emergency_measures: {
     priority: "HIGH",
     display_order: "TOP",
     description: "Structured tracker of Egyptian emergency economic measures imposed during the 2026 Iran war. Each entry carries status (ACTIVE/LIFTED/PARTIAL), since/until dates, the underlying decree, and a verifiable source URL. Updated by the weekly review and daily refresh. Surfaced on the mobile dashboard.",
-    last_verified_iso: "2026-05-01T09:30:00.000Z",
+    last_verified_iso: "2026-10-11T22:20:00.000Z",
     monthly_gas_import_bill: {
       pre_war_usd_m: 560,
       current_usd_m: 1650,
@@ -1991,9 +1992,9 @@ Object.assign(window.GULF_RISK_DATA, {
     measures: [
       {
         label: "Sunday remote-work mandate (de-facto 4-day in-office week)",
-        status: "ACTIVE",
+        status: "ENDING",
         since: "2026-04-05",
-        until: "2026-05-31 (extended via cabinet approval; under further extension review)",
+        until: "2026-09-30 (extension under PM Decree 2590 of 2026 expired; cabinet approved ending the system on 30 Sep, Ahram Online)",
         decree: "PM Decree No. 982 of 2026",
         source: "Ahram Online / Egypt Independent / EnterpriseAM",
         url: "https://english.ahram.org.eg/NewsContentP/1/566969/Egypt/Egypt-cabinet-approves-continued-remote-work-on-Su.aspx",
@@ -2038,8 +2039,8 @@ Object.assign(window.GULF_RISK_DATA, {
     priority: "CRITICAL",
     alert_color: "red",
     display_order: "TOP",
-    headline: "ENERGY WATCH (refreshed 11 Oct 2026): the June-August blackout window has passed with no verified rolling-blackout report found; the government pledged no load shedding and the winter gas and fuel-oil exposure remains. Older April detail below is superseded where marked.",
-    summary: "11 Oct 2026 refresh. Pre-summer: the Electricity Ministry said on 19 Jun there would be no load shedding, and a 2 Jul plan cited about 3,500 MW of new capacity and extra fuel stocks. Four LNG regasification vessels (three at Ain Sokhna, one at Damietta, about 2.7 bcf/d combined) were lined up, and Israeli gas flows were reported back to pre-war levels after the Leviathan restart (EnterpriseAM, 6 Apr). I found NO reporting of rolling blackouts this summer, but that is absence of evidence from a limited search, not proof of none; the April 60-75% July-blackout estimate was not borne out in anything I could verify. Treat the panel as unverified for actual outage experience. Structural exposure persists: war-disrupted Qatari LNG, dependence on Israeli gas through a high-risk corridor, fuel-oil burn and a stressed pound making imports dearer. The 29 Jul drone strike on two ships off Damietta (FCDO) shows the gas import infrastructure is within reach of the regional conflict.",
+    headline: "ENERGY (refreshed 11 Oct 2026): THE GOVERNMENT PLEDGE FAILED. Hours-long blackouts hit several governorates in July despite the no-load-shedding promise; winter gas demand and the import bill are the next test.",
+    summary: "11 Oct 2026 refresh. Pledge: the Electricity Ministry said on 19 Jun there would be no load shedding, and a 2 Jul plan cited about 3,500 MW of new capacity and extra fuel stocks. Reality: Egypt Independent (23 Jul) reported prolonged outages lasting hours at irregular intervals across Qalyubia, the Red Sea, Port Said, Sharqia and Minya, which residents said were almost daily, blamed by supply companies on extreme heat and grid strain with no official explanation or restoration times; North-Africa.com (27 Jul) reported another round of summer power disruptions. The 2024 playbook (denial, then temporary load-shedding) repeated. Supply side: four LNG regasification vessels (three at Ain Sokhna, one at Damietta, about 2.7 bcf/d) and Israeli gas reported back to pre-war levels after the Leviathan restart (EnterpriseAM, 6 Apr). Not found: current outage status for September and October, or a national load-shedding schedule. Structural exposure persists: war-disrupted Qatari LNG, Israeli gas through a high-risk corridor, fuel-oil burn, a stressed pound, and the 29 Jul drone strike on two ships off Damietta.",
     current_measures: [
       "9pm shop/restaurant/cafe closures REVERSED 28 Apr 2026 (The National) — government cited business-activity damage outweighing energy savings; pre-Mar 28 hours restored",
       "MANDATED 1-day-per-week work-from-home for non-essential public-sector workers — first WFH mandate of 2026",
@@ -2050,8 +2051,8 @@ Object.assign(window.GULF_RISK_DATA, {
       "Government burning fuel oil to avoid rolling blackouts (MEES 24 Apr)"
     ],
     blackout_risk: {
-      current_status: "No verified rolling blackouts found for summer 2026 (unconfirmed; limited search). Government line is no load shedding. Winter gas demand and the gas-import bill are the next test.",
-      summer_window: "June-August 2026 window has passed. Next pressure points: winter gas demand, any new Israeli supply interruption, any Hormuz or Red Sea shock to LNG, and the pound-driven cost of imports.",
+      current_status: "Blackouts occurred in July (Egypt Independent, 23 Jul). Current status unverified; no national schedule found. Government pledge falsified.",
+      summer_window: "June-August 2026 window has passed with localised multi-governorate blackouts. Next pressure points: winter gas demand, any new Israeli supply interruption, any Hormuz or Red Sea shock to LNG, and the pound-driven cost of imports.",
       probability_some_blackouts_july: "60-75% per analyst consensus + 2024 precedent",
       probability_some_blackouts_june: "30-45% — depends on how fast fuel-oil stockpile is consumed",
       impact_for_business_traveller: "Hotel rooms may lose A/C 2-4 hours intermittently. Quality hotels with full backup-generator coverage will hold lighting/lifts/Wi-Fi but A/C may cycle. Plan for 4+ hours daily mains-power uncertainty by mid-June."
@@ -2761,7 +2762,7 @@ Object.assign(window.GULF_RISK_DATA, {
       "Wed 7 Oct MORNING - Brent ~$101.50 (TradingEconomics, +0.92%): UKMTO counts nine tanker incidents in Hormuz so far in October, offset by Saudi pipeline capacity restored and G7 emergency stock releases. Iran International: Iranian oil exports fallen to zero, rial near record lows, Trump says the US must finish up with Iran the nice way or the not-so-nice way; rhetoric back to square one. EGP 52.28 (TradingEconomics 6 Oct, -0.21% d/d). AAA gas $4.3685 (6 Oct). Egypt Aug CPI 14.5% and NIR $57.22bn unchanged (Sept prints due ~7-10 Oct).",
       "Tue 6 Oct EVENING - Brent ~$100.38 (TradingEconomics; low $97.8) as Gulf crude exports hit ~91% of pre-war baseline and Middle East exports ex-Iran exceed pre-war levels for the first time (CBS live). AAA gas $4.3685 (+$0.003 d/d, -$0.087 w/w). Hormuz: one tanker struck Monday, three over the weekend (CBS/Iran International); CENTCOM: 13 commercial ships destroyed in 12 weeks; Trump rejected Iran reopening conditions, Iran preparing counterproposal; Qatar mediation 'good and constructive' per Iran interior minister; Pezeshkian rules out US talks; Trump says conflict 'essentially almost over'. Yemen/Saudi: 270+ killed in 24h, Houthi strikes on Jazan/Najran airports; Turkey and Pakistan deploying troops to Saudi; US approves $1bn UAE and $400m Kuwait arms sales. UK diesel record 199.52p/l. Egypt Sept NIR/CPI not yet released.",
       "Mon 5 Oct EVENING - Brent ~$102.30 (0900 GMT; dipped to ~$101.59, WTI ~$90.62) as Middle East crude exports ran above pre-war levels on 4 of the last 7 days of September and the G7 prepares ~100m bbl release (Reuters via Sunday Guardian / CNBC headline). AAA gas $4.3653 (-$0.015 vs 3 Oct). EGP 52.41 (Wise, fresh 30-day weak). Diplomacy/military: Washington Times 4 Oct - Iranian leaders prioritise talks while US adds forces and prepares for escalation; Al Jazeera 4 Oct - Yemeni government offensive vs Houthi areas, Trump warns Tehran of the hard way. Hormuz: straits.live Day 218 still lists the strait as closed. Egypt Aug NIR $57.214bn, Aug CPI 14.5%, Aug Suez $567.1m (+56.7% YoY); Sept NIR/CPI prints due ~7-10 Oct. Scenario weights unchanged.",
-      "Sat 3 Oct EVENING (Day 218) - Brent $102.25 (TradingEconomics 2 Oct, -0.06% d/d, +7% m/m) as G7 agrees to release up to 100m barrels of crude and diesel over four months and Gulf exports rebound near pre-war levels; China suspends refined-fuel exports in October. US is adding a third carrier strike group and 2,000 Marines; CNBC reports Saudis reportedly planning an attack on the Houthis. Hormuz: Kuwait-flagged tanker struck 1 Oct (five Indian nationals rescued); straits.live Day 217 shows 1 transit on 27 Sep and 179 vessels stranded; prediction markets price 3% odds of normalisation by 31 Oct. Diplomacy: Iran's 60-day regionwide ceasefire / phased Hormuz reopening / blockade-lifting roadmap (presented at UNGA with Qatar, Pakistan and Egypt mediating) rejected by Trump; indirect Qatar talks continue. AAA gas $4.3807 (-$0.015 d/d, -$0.107 w/w). EGP 52.31 (Wise). Egypt Aug NIR $57.214bn and Aug urban CPI 14.5% unchanged pending Sept prints. Scenario weights unchanged.",
+      "Sat 3 Oct EVENING (Day 218) - Brent $102.25 (TradingEconomics 2 Oct, -0.06% d/d, +7% m/m) as G7 agrees to release up to 100m barrels of crude and diesel over four months and Gulf exports rebound near pre-war levels; China suspends refined-fuel exports in October. US is sending USS Theodore Roosevelt (left San Diego 27 Sep, not yet in theatre, reported to relieve USS George Washington) and further troops; CNBC reports Saudis reportedly planning an attack on the Houthis. Hormuz: Kuwait-flagged tanker struck 1 Oct (five Indian nationals rescued); straits.live Day 217 shows 1 transit on 27 Sep and 179 vessels stranded; prediction markets price 3% odds of normalisation by 31 Oct. Diplomacy: Iran's 60-day regionwide ceasefire / phased Hormuz reopening / blockade-lifting roadmap (presented at UNGA with Qatar, Pakistan and Egypt mediating) rejected by Trump; indirect Qatar talks continue. AAA gas $4.3807 (-$0.015 d/d, -$0.107 w/w). EGP 52.31 (Wise). Egypt Aug NIR $57.214bn and Aug urban CPI 14.5% unchanged pending Sept prints. Scenario weights unchanged.",
       "Sat 3 Oct AM (Day 218) - Brent ~$102.28 (weekly -2%) after Thursday's 4% rally; Trump rejected Iran's 7-day Hormuz-for-blockade proposal on 1 Oct, Araghchi says no change in position; Qatar-mediated indirect talks continue. Hormuz 17 transits 29 Sep, three vessels struck. AAA gas $4.396 (-$0.10 w/w). EGP 52.31. Egypt Aug NIR $57.214bn / CPI 14.5% unchanged pending Sept prints.",
       "Tue 15 Sep EVENING (Day 162) — ★★★ THE IAEA BOARD HAS REFERRED IRAN TO THE UN SECURITY COUNCIL — FIRST SUCH REFERRAL IN TWENTY YEARS, AND THIS PAGE HAD NOT RECORDED IT. On or about 10 Sep the IAEA Board of Governors voted 23 IN FAVOUR, 3 AGAINST, 8 ABSTENTIONS to refer Iran's non-compliance with its nuclear non-proliferation obligations to the UNSC for possible countermeasures. CHINA, RUSSIA AND NIGER VOTED AGAINST. READ THE VOTE, NOT JUST THE RESULT: the referral lands at a Council where two permanent members are already on record opposing it, so the practical ceiling on anything that follows is a vetoed resolution — but the FILE has still moved from a technical dispute the Agency was managing to a Council matter with a veto structure attached. That is a NARROWER off-ramp, not a wider one, and it removes the IAEA-brokered route that the multilateral scenario on this page has been partly resting on. ★ STOCKPILE FIGURE RESTATED AND DISAMBIGUATED: DG Grossi states that MORE THAN 9,000kg OF ENRICHED URANIUM across Natanz, Fordow and Isfahan remains inaccessible, and that the Agency lost continuity of knowledge over the declared LEU and up-to-60% HEU inventories MORE THAN A YEAR AGO. This dashboard has been carrying 440.9kg of 60% HEU. BOTH NUMBERS ARE CORRECT AND THEY ANSWER DIFFERENT QUESTIONS — 440.9kg is the proliferation-relevant 60% sub-total and stays the right figure for a breakout estimate; >9,000kg is the total unverified enriched inventory and is the right figure for the safeguards case now before the Council. The page is carrying both and will not conflate them. Iran remains the only NPT non-nuclear-weapon State to have produced and accumulated uranium enriched to 60% U-235. SOURCE: FDD analysis 10 Sep; IAEA chronology / Grossi statement; ISIS June 2026 reports. GRADE: institutional vote, on the record; the vote tally is single-analysis-sourced and should be re-verified against the IAEA record."
     ],
@@ -2886,17 +2887,15 @@ Object.assign(window.GULF_RISK_DATA, {
   },
 
   ground_ops: {
-    status: "7 Oct: posture is re-escalatory. A third US carrier (USS Theodore Roosevelt) moved into theatre around 3 Oct, senior officials met at Camp David, and Iran says it is preparing a major round of fighting. US force presence in the region is large and rising. NOTE: the detailed unit laydown below dates from the spring and is pending a sourced refresh, do not read the individual units as current.",
-    us_forces_total: "50,000+ in region and rising",
+    status: "11 Oct refresh (sourced). CARRIERS: per TWZ carrier tracker (6 Oct) only USS George Washington is confirmed in CENTCOM; USS George H.W. Bush has left for PACOM (Phuket port call, 188 days at sea); USS Abraham Lincoln is home after a 311-day deployment; USS Theodore Roosevelt left San Diego 27 Sep with CVW-11 and is not yet in theatre. Army Recognition (30 Sep) says Roosevelt relieves George Washington, so this looks like a rotation rather than a net addition; UPI and Japan Times headlines on 2 Oct framed it as adding a carrier plus roughly 10,000 troops (I could not open those pages), so net force growth is UNRESOLVED. The Boxer Amphibious Ready Group is in the area. Earlier lines here calling Roosevelt a third carrier 'in theatre' were wrong and are corrected. Other posture: Camp David meeting and WSJ report that Trump expects to resume bombing after the 3 Nov midterms. The spring unit laydown (31st MEU, 82nd Airborne, 11th MEU, Aegis destroyer count) has been REMOVED as unsourced for today; no current verified troop total found.",
+    us_forces_total: "Not verified. Earlier 50,000+ figure unsourced. Reported ~10,000 additional troops planned (UPI / Japan Times, 2 Oct, headline only).",
     forces_deployed: [
-      "31st MEU — 2,500 Marines + sailors, USS Tripoli — IN THEATER",
-      "82nd Airborne Divisional HQ — Maj. Gen. Brandon Tegtmeier forward deployed",
-      "82nd Airborne 1st BCT (IRF) — ~2,000-3,000 paratroopers deployed",
-      "USS Abraham Lincoln Carrier Strike Group — F-18s, F-35Cs in theater",
-      "8 Aegis guided missile destroyers in Arabian Sea",
-      "USS George H.W. Bush Carrier Strike Group — ~6,000 personnel ARRIVED CENTCOM Apr 23",
-      "11th MEU — 2,500 Marines, USS Boxer — arriving end April",
-      "10,200 additional troops confirmed deploying"
+      "USS George Washington (CVN-73) CSG, Arabian Sea, the only carrier confirmed in CENTCOM on 6 Oct (TWZ); due to be relieved",
+      "USS Theodore Roosevelt (CVN-71) CSG, left San Diego 27 Sep with CVW-11, not yet in theatre; deployment may exceed seven months (Army Recognition 30 Sep)",
+      "USS George H.W. Bush (CVN-77) CSG, LEFT CENTCOM for PACOM, Phuket port call after 188 days at sea (TWZ 6 Oct)",
+      "USS Abraham Lincoln (CVN-72) CSG, HOME or arriving San Diego after a 311-day record deployment (TWZ 6 Oct, ABC)",
+      "Boxer Amphibious Ready Group, in the area (Army Recognition 30 Sep)",
+      "Spring unit laydown (31st/11th MEU, 82nd Airborne, destroyer counts) removed 11 Oct: not re-verified"
     ],
     target_1: {
       name: "Kharg Island",
@@ -2920,8 +2919,8 @@ Object.assign(window.GULF_RISK_DATA, {
     },
     expert_consensus: "USNI Proceedings, War on the Rocks, IISS, Defense Priorities all conclude: tactically feasible, strategically counterproductive. Will not compel Iran to open Hormuz. Will not collapse regime.",
     iraq_comparison: "NOT Iraq 2003. Targeted raids and seizures. But: no clear endgame. Iran's asymmetric capabilities intact enough to 'make things hurt' per Cato Institute.",
-    ceasefire_extension_impact: "Tue 5 May 18:07 UTC EVENING: H-hour probability HOLDS ~30-35%; Hegseth the-ceasefire-is-not-over (CNBC) gives administration cover for non-escalation; Pred #47 revised DOWN to ~18-25%; Pred #46 revised UP to ~42-52% on second-engagement evidence. HISTORICAL TUE MORNING: H-hour probability HOLDS ~30-35% (from Mon evening upgrade). US intel limited-new-damage finding (Reuters) raises Murkowski 'credible plan' bar against any new operational order — Trump's strikes have not moved the nuclear timeline since last summer per Brewer, complicating the political case for further kinetic action. Trump-declines-to-confirm-ceasefire (CNN live) keeps the H-hour interface publicly ambiguous. UAE retaliatory framing materialised (school remote-learning Tue-Fri; Foreign Ministry 'reserves full and legitimate right to respond') — Pred #45 partial-resolves on formal-statement bucket. HISTORICAL MON EVENING: H-hour probability UPGRADED to ~30-35% (from morning ~25-30%). The 8 Apr open-ended ceasefire is now operatively in active breach on the GCC limb (Iran-UAE) and in low-level kinetic exchange under Project Freedom on the bilateral limb (warning shots, 7 small boats destroyed). White House 60-day-deadline halt remains operative under broader Republican challenge (Collins + Paul Friday crossover; Murkowski concrete AUMF mechanism). Path-up triggers ESCALATED: (a) operational order following Trump\'s PBS \'reviewing new military options to relaunch war\' framing (probability rising), (b) UAE retaliatory request for additional US/Western kinetic support (post-Fujairah), (c) further IRGC drone/missile attack on UAE or other GCC asset, (d) any kinetic Iranian response to USN destroyer presence (mine-laying under shoot-to-destroy ROE), (e) MV Touska retaliation, (f) Hezbollah retaliation in Lebanon arc (~14 May truce expiry approaching), (g) Beijing summit collapse (May 14-15). Path-down filament continues to narrow: Trump rejection now ratcheted to operational-options review; Iran-side preconditions hardened (30-day war-end demand, Rezaee \'graveyard\' threat, ambassador-to-Pakistan condition); Beijing summit (May 14-15) and Russia/Oman remain the only standing diplomatic surfaces, all of which require Iranian acceptance Tehran has not signalled. IAEA-Russia-US HEU extraction discussion CONTINUES Mon (Foreign Policy/Hill/Bulletin corroborated) — Trump publicly told Putin to focus on Ukraine instead; agreement not imminent.",
-    updated: "2026-10-08T06:40:00.000Z"
+    ceasefire_extension_impact: "Removed 11 Oct: the May-era ceasefire and H-hour probability commentary is superseded; see scenarios for current weights.",
+    updated: "2026-10-11T21:50:00.000Z"
   },
 
   egypt: {
@@ -3006,7 +3005,7 @@ Object.assign(window.GULF_RISK_DATA, {
     developments: [
       "11 Oct 2026: IMF - Madbouly says Egypt needs no new IMF programme and can grow without one (reported ~4 Oct); IMF still expects the final EFF review plus RSF review (~$2.3bn) in Q4; Fitch (8 Oct) expects the arrangements to end in November vs the 15 Dec expiry carried here (unreconciled). IMF flagged SOE reform slower than anticipated (July), asset sales ~$520m, Sept PMI 47.2. Read: a signalling bluff - stand alone rather than invite validation - resting on reversible portfolio inflows and flattered reserves; rupture weight held 20-25%, Dec-Feb, test point the final review and Q1 2027. Fitch B stable, reserves $54.4bn per Fitch.",
       
-      "7 Oct 2026: EGP ~52.41 (Wise/CBE), back near March lows after giving back the September recovery. Headline NIR record $57.2bn Aug (gold-flattered); operative cash far lower. Inflation 14.5% Aug, core 14.9%. IMF EFF expires 15 Dec, no successor announced; final review + ~$2.3bn pencilled Q4. Suez FY25/26 $4.67bn (+23% YoY, under half the $10.2bn 2023 peak). Brent ~$100-102, Murban ~$110, Gulf exports ~91% of pre-war. War re-escalation signals (third US carrier, Camp David, Iran preparing a major round) point at the December window.","5 May 2026 (Tue 18:07 UTC EVENING): HEGSETH PUBLICLY ASSERTS THE CEASEFIRE IS NOT OVER (CNBC 5 May) after Iran attacked US forces and the commercial vessels they were protecting in Hormuz overnight Mon-Tue. First formal administration statement on ceasefire status since Trump-declines-to-confirm framing. Pred #47 revised DOWN ~25-35% to ~18-25%; Pred #46 (IRGC mine-laying) revised UP ~38-48% to ~42-52%.",
+      "7 Oct 2026: EGP ~52.41 (Wise/CBE), back near March lows after giving back the September recovery. Headline NIR record $57.2bn Aug (gold-flattered); operative cash far lower. Inflation 14.5% Aug, core 14.9%. IMF EFF expires 15 Dec, no successor announced; final review + ~$2.3bn pencilled Q4. Suez FY25/26 $4.67bn (+23% YoY, under half the $10.2bn 2023 peak). Brent ~$100-102, Murban ~$110, Gulf exports ~91% of pre-war. War re-escalation signals (USS Theodore Roosevelt deploying, Camp David, Iran preparing a major round) point at the December window.","5 May 2026 (Tue 18:07 UTC EVENING): HEGSETH PUBLICLY ASSERTS THE CEASEFIRE IS NOT OVER (CNBC 5 May) after Iran attacked US forces and the commercial vessels they were protecting in Hormuz overnight Mon-Tue. First formal administration statement on ceasefire status since Trump-declines-to-confirm framing. Pred #47 revised DOWN ~25-35% to ~18-25%; Pred #46 (IRGC mine-laying) revised UP ~38-48% to ~42-52%.",
       "5 May 2026 (Tue EVENING): IRAN ATTACKED US FORCES + COMMERCIAL VESSELS in Hormuz overnight Mon-Tue (CNBC/Hegseth context) — SECOND kinetic engagement under Project Freedom in 24h.",
       "5 May 2026 (Tue EVENING): IRAN 14-POINT PROPOSAL — UPDATED PHASED FRAMING (Reuters via CNBC 5 May): end war + Hormuz first, leave nuclear talks for later. US HEU-precondition remains binding.",
       "5 May 2026 (Tue EVENING): BRENT $113.41 INTRADAY RECOVERY (TradingEconomics) from Tue AM $112.50; EGP 53.530 (Wise/xe.com Tue PM) HOLDS through Tue trading; intraday high 53.805 consolidated back to 53.5x band; AAA US gas $4.457/gal HOLDS.",
@@ -3107,19 +3106,27 @@ Object.assign(window.GULF_RISK_DATA, {
 
   gcc_war_damage: {
     total_arab_cost_bn: 120,
-    total_us_cost_bn: 47,
-    us_daily_burn_m: 500,
-    iran_strikes_uae: { ballistic_missiles: 438, drones: 2012, cruise_missiles: 19 },
+    total_us_cost_bn: 40,
+    us_daily_burn_m: null,
+    iran_strikes_uae: { ballistic_missiles: 537, drones: 2256, cruise_missiles: 26 },
     iran_total_ballistic_across_gcc: 1200,
     iran_total_drones_across_gcc: 4000,
-    gcc_interceptors_expended: 2400,
-    gcc_interceptors_pre_war: 2800,
-    gcc_interceptors_remaining_pct: { bahrain: 13, uae: 25, kuwait: 25, qatar: 60 },
-    cost_exchange_ratio: "82:1 in Iran's favour — Shahed $20-50k vs PAC-3 MSE $4.1M",
-    replenishment_timeline: "Lockheed Martin producing 650/year, target 2,000/year not achievable until 2030",
+    gcc_interceptors_expended: null,
+    gcc_interceptors_pre_war: null,
+    gcc_interceptors_remaining_pct: null,
+    sourced_notes_11oct: [
+      "US cost: Pentagon and CBO estimates $38-42bn, excluding aircraft losses and base damage (Forbes/Hartung 8 Oct). CRS: 81 US military aircraft lost, 45 of them Reapers.",
+      "US interceptors (CSIS, Cancian and Park, 30 Jul): Patriot about 67% of inventory used, 759-827 left (about a third of prewar); THAAD 234-278 left of 452 prewar.",
+      "Tomahawk: 850+ fired (Washington Post via CBS, 27 Mar, so now higher); inventory about 3,100 (Stimson, 27 Mar); procurement about 90/yr (CSIS). Prewar inventory field cleared as unsourced.",
+      "UAE intercepts per UAE MoD as of 9 Apr: 537 ballistic, 2,256 drones, 26 cruise; 13 killed, 224 injured. Attacks continued after 9 Apr (e.g. May), so this is a floor, not a total.",
+      "Removed as unsourced: Gulf-state interceptor remaining percentages (Bahrain 13, UAE 25, Kuwait 25, Qatar 60) and the 2,400-of-2,800 aggregate; US daily burn $500m. Gulf states' air-defence shortage is reported qualitatively (CBS, WSJ, March), without verified percentages.",
+      "NYT (via Hartung): some US Middle East bases damaged so severely they may never be rebuilt; replacements to be built farther away."
+    ],
+    cost_exchange_ratio: "About 82:1 on unit cost (arithmetic: Shahed-class drone $20-50k vs PAC-3 MSE ~$4.1M). Unit costs are estimates.",
+    replenishment_timeline: "Unverified spring figure (Lockheed PAC-3 650/yr, 2,000/yr target by 2030) not re-checked 11 Oct. Tomahawk procurement ~90/yr (CSIS via CBS, 27 Mar) vs 850+ fired.",
     us_tomahawks_fired: 850,
-    us_tomahawk_inventory_pre_war: 4000,
-    us_tomahawk_annual_production: 100,
+    us_tomahawk_inventory_pre_war: null,
+    us_tomahawk_annual_production: 90,
     energy_infrastructure_struck: [
       "QatarEnergy Ras Laffan + Mesaieed — LNG halted entirely, force majeure",
       "Saudi Ras Tanura refinery — struck multiple times",
@@ -3140,7 +3147,7 @@ Object.assign(window.GULF_RISK_DATA, {
     oil_production_drop_mbpd: 10,
     aviation_losses_bn: 40,
     daily_flights_cancelled_peak: 40000,
-    strategic_verdict: "7 Oct: the regional allies are bearing the economic cost, not Washington. World Bank cut 2026 regional growth from above 4.4% to 1.3%; Qatar, Kuwait and Bahrain are contracting. UNDP puts the Arab-world GDP loss at $120-194bn, energy-facility damage at $25-58bn. Gulf property is off ~30%+ since March. Aramco still posted a 26% profit as the price spike offset lost volume, so sovereign energy revenue holds while the domestic economy takes the damage. NOTE: the materiel counts below date from the spring and are pending a sourced refresh.",
+    strategic_verdict: "7 Oct: the regional allies are bearing the economic cost, not Washington. World Bank cut 2026 regional growth from above 4.4% to 1.3%; Qatar, Kuwait and Bahrain are contracting. UNDP puts the Arab-world GDP loss at $120-194bn, energy-facility damage at $25-58bn. Gulf property is off ~30%+ since March. Aramco still posted a 26% profit as the price spike offset lost volume, so sovereign energy revenue holds while the domestic economy takes the damage. Materiel counts re-sourced 11 Oct (see sourced_notes_11oct); unsourced figures removed.",
     incidents: [
       "5 May 2026 (Tue 18:07 UTC EVENING): HEGSETH PUBLICLY ASSERTS THE CEASEFIRE IS NOT OVER (CNBC 5 May) after Iran attacked US forces + commercial vessels in Hormuz overnight Mon-Tue — first formal administration ceasefire-status statement since Trump-declines-to-confirm Mon-Tue.",
       "5 May 2026 (Tue EVENING): IRAN ATTACKED US FORCES + COMMERCIAL VESSELS in Hormuz overnight Mon-Tue (CNBC/Hegseth context) — SECOND kinetic engagement under Project Freedom in 24h.",
@@ -3223,7 +3230,7 @@ Object.assign(window.GULF_RISK_DATA, {
       "21 Apr 2026: Hormuz transit collapsed to 3-ship 24h low.",
       "19 Apr 2026: USS Spruance fires on engine room, seizes MV Touska."
     ],
-    updated: "2026-10-08T06:40:00.000Z"
+    updated: "2026-10-11T21:50:00.000Z"
   },
 
   hormuz: {
@@ -3260,7 +3267,7 @@ Object.assign(window.GULF_RISK_DATA, {
     operation_name: "Operation Epic Fury",
     day_number: 222,
     start_date: "28 Feb 2026",
-    current_phase: "7 Oct, Day ~222: prolonged intermission turning back toward escalation. Diplomacy stalled after Trump rejected the Iran 7-day Hormuz roadmap on 26 Sep; WSJ reports he told aides he expects to resume bombing after the 3 Nov midterms. Third US carrier (Theodore Roosevelt) moved into theatre, senior officials met at Camp David, and an Iran source says Tehran is preparing a major round of fighting (3 Oct). Hormuz contested, Gulf crude rerouted to ~91% of pre-war. Brent ~$100-102.",
+    current_phase: "7 Oct, Day ~222: prolonged intermission turning back toward escalation. Diplomacy stalled after Trump rejected the Iran 7-day Hormuz roadmap on 26 Sep; WSJ reports he told aides he expects to resume bombing after the 3 Nov midterms. USS Theodore Roosevelt deploying (left San Diego 27 Sep, not yet in theatre; reported to relieve USS George Washington; USS George H.W. Bush has already left CENTCOM), senior officials met at Camp David, and an Iran source says Tehran is preparing a major round of fighting (3 Oct). Hormuz contested, Gulf crude rerouted to ~91% of pre-war. Brent ~$100-102.",
     key_events: [
       "3 Oct 2026: third US carrier USS Theodore Roosevelt into theatre; Camp David war meeting; Iran source says the war is resuming and Tehran is preparing a major round",
       "26 Sep 2026: Trump rejects Iran 7-day Hormuz roadmap; WSJ reports he expects to resume bombing after the Nov midterms",
@@ -3364,13 +3371,13 @@ Object.assign(window.GULF_RISK_DATA, {
     ],
     trump_domestic: "7 Oct: restraint is situational, tied to the 3 Nov midterms and the oil price. After the midterms he loses the main brake. Grievance-driven and wants his own way.",
     senate_signals: "Tue 5 May 18:07 UTC EVENING: Hegseth (Defense Secretary) PUBLICLY ASSERTS the ceasefire is not over (CNBC 5 May) after Iran attacked US forces + commercial vessels in Hormuz overnight Mon-Tue — administration retains ceasefire frame to give cover against Murkowski credible-plan AUMF threshold. Pred #47 (formal Trump declaration ceasefire null/non-operative within 14 days) revised DOWN ~25-35% to ~18-25%. Combined with US INTEL finding (Reuters Tue AM) — limited new damage to Iran nuclear program; ~1-year breakout timeline UNCHANGED — the political bar against any new operational order rises further. Murkowski AUMF introduction watch HOLDS. HISTORICAL TUE MORNING: US INTEL finding (Reuters) — limited new damage to Iran nuclear program; ~1-year breakout timeline UNCHANGED from last summer — RAISES the political bar for Murkowski 'credible plan' AUMF threshold against any new operational order. Trump's strikes have not moved the nuclear timeline since last summer per Brewer, complicating the political case for further kinetic action. HISTORICAL MON EVENING: 60-day War Powers Act deadline formally arrived 1 May. White House continues to argue ceasefire halts the clock — but the operative ceasefire is now visibly breached on the GCC limb (Iran-UAE Fujairah attack; first Iranian attack on UAE since 8 Apr) and the bilateral US-Iran surface is in active low-level kinetic exchange under Project Freedom (warning shots at USN destroyers, 7 Iranian small boats destroyed per Trump/CBS). The deadline-halt argument is now operationally hollowing out. TWO GOP defectors on Friday\'s vote — Collins + Rand Paul (Hill/NOTUS/Time); vote 47-50. Murkowski announced she WILL INTRODUCE AUMF for the conflict if 60-day passes without a \'credible plan\' from Trump (Hill) — concrete mechanism. NEW MON EVENING: Trump now reviewing new military options to relaunch war (PBS NewsHour) — intensifies the AUMF politics in both directions: Trump\'s framing makes the operational-decision pathway more visible and a third Republican defection more probable; Murkowski\'s concrete-plan threshold becomes harder for Trump to meet without Iran-side concessions Tehran has not signalled. AAA US gas $4.457 (+$0.011 from Mon AM) = pump-feed compounding pressure on the Senate fracture. Watch ahead: when Murkowski introduces AUMF; whether Lee aligns to make 4 GOP defectors; whether Schumer signals floor-vote; whether Reuters US-intel finding gets cited in AUMF rationale.",
-    updated: "2026-10-08T06:35:00.000Z"
+    updated: "2026-10-11T21:50:00.000Z"
   },
 
   scenarios: {
     tonight: [
       { name: "Grinding frozen-hot stalemate - war neither resolves nor blows up. Hormuz stays contested, tanker strikes absorbed within days, Gulf crude reroutes to ~91% of pre-war, Brent holds ~$100-105. Egypt grinds, pound slides in managed steps. Modal path.", prob: 47, oil: "$95-110", egypt: "STRESS - EGP ~52.4, managed slide, reserves defended on paper", notes: "7 Oct: base case. UNGA produced no deal and Trump rejected the Iran 7-day Hormuz roadmap on 26 Sep. Brent ~$100-102, Murban ~$110, VLCC freight elevated, Gulf exports ~91% of pre-war via rerouting. Egypt headline NIR $57.2bn (gold-flattered), operative cash far lower; inflation 14.5% Aug. IMF EFF expires 15 Dec with no successor announced. The grind is not safety, it is the erosion that makes rupture cheaper to reach each month." },
-      { name: "Re-escalation - US resumes significant strikes after the 3 Nov midterms (WSJ: Trump told aides he expects to). Third carrier USS Theodore Roosevelt in theatre, Camp David war meeting, Iran preparing a major round. Oil spikes, Egypt squeezed into the December window.", prob: 32, oil: "$110-140", egypt: "Crisis", notes: "7 Oct: raised on the carrier move and the Iran war-is-resuming signals (3 Oct). The danger is a post-midterm campaign overlapping the 15 Dec IMF expiry and the seasonal squeeze. The convergence case, now with a plausible trigger and a date." },
+      { name: "Re-escalation - US resumes significant strikes after the 3 Nov midterms (WSJ: Trump told aides he expects to). USS Theodore Roosevelt deploying (not yet in theatre; relief for USS George Washington), Camp David war meeting, Iran preparing a major round. Oil spikes, Egypt squeezed into the December window.", prob: 32, oil: "$110-140", egypt: "Crisis", notes: "7 Oct: raised on the carrier move and the Iran war-is-resuming signals (3 Oct). The danger is a post-midterm campaign overlapping the 15 Dec IMF expiry and the seasonal squeeze. The convergence case, now with a plausible trigger and a date." },
       { name: "Negotiated de-escalation / Hormuz reopening - a face-saving framework forms despite the 26 Sep rejection, the strait reopens, oil falls, Suez and tourism start to return.", prob: 17, oil: "$80-95", egypt: "Mixed - pressure eases if it holds", notes: "7 Oct: falling. The 7-day plan was tabled via Qatar then rejected; both capitals say no basis for a deal. A Hormuz reopening is the single biggest upside for Egypt via Suez, but it is not where the weight sits." },
       { name: "Disorderly escalation beyond anyone plan - a strike that kills the wrong people, a full Hormuz closure, an Israeli wildcard, or instability inside Tehran forces a response nobody chose.", prob: 4, oil: "$140+", egypt: "Catastrophic", notes: "7 Oct: low odds, fat tail, hardest to model. Israel is the actor the US-Iran frame underweights. Deliberate war is off the table near-term; stupid war never is." }
     ],
@@ -3378,7 +3385,7 @@ Object.assign(window.GULF_RISK_DATA, {
     sixty_day: "7 Oct: the dangerous window is December to February, where the IMF expiry, the seasonal external squeeze and the winter tourism disappointment converge, and where a post-midterm US escalation would land. The structural read is a war settling into a permanent condition the region reorganises around rather than resolving, pre-1914 not post-1945. Egypt is where it shows early.",
     egypt_specific: "7 Oct: EGP ~52.4 (CBE), back near March lows having given back the September recovery. Programme rate fixed 47.81. Headline NIR a record $57.2bn end-August but gold-flattered, operative cash far lower (headline-vs-operative thesis holds). Urban inflation 14.5% Aug, core 14.9%. Suez FY25/26 $4.67bn, up 23% YoY but less than half the $10.2bn 2023 peak. IMF EFF expires 15 December with no successor, final review and ~$2.3bn pencilled Q4. The state defends solvency by passing cost to the household, so lived conditions worsen on every macro path.",
     egypt_investment: "HOLD. 7 Oct: GCC state hold the strategic anchor, freeze new commercial commitment until the December window clears, fund only what reduces rupture risk. Western investor reduce and hedge the currency now, keep tenor short, treat any local-currency carry as a small speculative trade. China commit nothing new, expect opportunistic acquisition not support, wait to buy distress cheap. Earliest credible clean entry H1 2027, gated on a successor IMF arrangement and the war not re-escalating.",
-    updated: "2026-10-08T06:30:00.000Z"
+    updated: "2026-10-11T21:50:00.000Z"
   },
 
   predictions: {
@@ -3430,25 +3437,67 @@ Object.assign(window.GULF_RISK_DATA, {
   },
 
   travel: {
-    advisory_date: "2026-05-06 (06:07 UTC MORNING update)",
+    advisory_date: "FCDO country pages read 11 Oct 2026 (each shows its own last-changed date in the note)",
     advisories: {
-      "Iran":         { level: "Do Not Travel", notes: "Active conflict — TRUMP PAUSED PROJECT FREEDOM citing \"Great Progress toward Complete and Final Agreement\" with Iran (Truth Social 5-6 May). Wed 6 May 06:07 UTC MORNING: Most material public de-escalation signal since 8 Apr ceasefire; Pred #47 collapses ~18-25% → ~8-15%; Pred #46 (IRGC mine-laying) DOWN ~42-52% → ~30-40%. Brent collapsed -5.55% to $108.09 on the de-escalation read. State Dept \"Leave Now\" / Level 4 reaffirmed (declarative pause does not change risk-grade for individuals). UAE 2nd-day attack 5 May (Al Jazeera) preserves Iran-UAE kinetic interface. HISTORICAL TUE EVENING: Tue 5 May 18:07 UTC EVENING: Hegseth the-ceasefire-is-not-over (CNBC); Pred #47 revised DOWN ~18-25%; Pred #46 revised UP ~42-52% on second-engagement evidence. State Dept Leave-Now / Level 4 reaffirmed. HISTORICAL TUE MORNING: CENTCOM denied IRGC false-claim USN ship struck; Brent eased ~1% Asia open on denial; Trump declines to confirm ceasefire still in effect (CNN); US intel finds limited new damage to Iran nuclear program (Reuters/US News). State Dept 'Leave Now' / Level 4 reaffirmed. HISTORICAL MON EVENING: Iran drone+missile attack on UAE Fujairah oil terminal (Al Jazeera/CNBC/NPR) — first Iranian attack on UAE since 8 Apr ceasefire; UAE intercepted 3 cruise missiles, 4th splashed; 3 Indian nationals wounded; IRGC Navy expanded control zone to include Fujairah, Khorfakkan, Umm Al Quwain. US Project Freedom operational — Iran fired warning shots at USN destroyers (Stars and Stripes); Trump reports 7 Iranian small boats shot down (CBS); Mohsen Rezaee threatens 'graveyard' of US vessels. Trump now reviewing new military options to relaunch war (PBS NewsHour). H-hour UPGRADED ~30-35%." },
-      "Kuwait":       { level: "Do Not Travel", notes: "Airport closed. Infrastructure damaged. Interceptors 75% depleted." },
-      "Israel":       { level: "Do Not Travel", notes: "Active conflict. Wed 29 Apr: Israeli strikes killed 8 in southern Lebanon incl 3 RESCUE WORKERS; Israel threatened to 'burn' all of Lebanon." },
-      "Lebanon":      { level: "Do Not Travel", notes: "Ceasefire formally extended to ~14 May but UNRAVELING — Wed 29 Apr Israeli strikes killed 8 incl 3 RESCUE WORKERS. Tue 28 Apr IDF struck Bekaa Valley for first time since 16 Apr truce. 2,500+ killed since Mar 2." },
-      "Iraq":         { level: "Do Not Travel", notes: "Iran-backed militias active." },
-      "Bahrain":      { level: "Do Not Travel", notes: "5th Fleet HQ — primary retaliation target. 87% interceptors expended." },
-      "Qatar":        { level: "Reconsider Travel", notes: "LNG revenue halted. Wed 29 Apr PM: Trump rejection + Brent $118.03 + Lebanon escalation keep kinetic risk elevated." },
-      "Saudi Arabia": { level: "Reconsider Travel", notes: "Refineries struck. UAE OPEC exit (1 May) intra-Gulf coordination signal." },
-      "UAE":          { level: "Reconsider Travel — UPGRADED watch", notes: "Dubai/Abu Dhabi operating with disruption. UAE exit from OPEC/OPEC+ effective 1 May 2026. NEW Wed 6 May 06:07 UTC MORNING: UAE attacked SECOND CONSECUTIVE DAY 5 May (Al Jazeera \"UAE comes under Iranian attacks for second consecutive day: Ministry\") — Iran-UAE kinetic interface continuing despite broader US-Iran de-escalation pivot (Trump pause of Project Freedom + Great Progress framing). UAE Presidential Adviser Anwar Gargash on X 5 May reaffirms condemnation. UAE schools remote learning Tue-Fri 5-8 May Day-2 operational. UAE Ministry of Foreign Affairs reaffirms condemnation; world leaders condemn Iran (Khaleej Times). UAE-specific watch HOLDS UPGRADED — direct counterweight to Trump pause de-escalation framing. HISTORICAL TUE EVENING: NEW Tue 5 May 18:07 UTC EVENING: UAE schools remote learning Tue-Fri 5-8 May Day-1 OPERATIONAL (Gulf News). UAE Foreign Ministry condemnation framing holds. UAE air defences continued readiness. Hegseth the-ceasefire-is-not-over (CNBC) absorbs into a marginally firmer regional-risk surface but UAE-specific watch HOLDS UPGRADED post-Mon Fujairah strike. HISTORICAL TUE MORNING: UAE schools moved to remote learning Tue-Fri 5-8 May (Gulf News/The National) — formal civil-defence response to Mon Fujairah strike. UAE Foreign Ministry: 'unacceptable transgression' / 'reserves full and legitimate right to respond'; UAE 'will not compromise on protecting its security, sovereignty and its people'. UAE air defences engaged 12 ballistic + 3 cruise + 4 UAVs (broader profile vs Mon evening). HISTORICAL MON EVENING: Iran drone+missile attack on UAE Fujairah oil terminal — fire at oil zone; 3 Indian nationals wounded; UAE intercepted 3 cruise missiles, 4th splashed (Al Jazeera/CNBC/NPR/Gulf News). FIRST IRANIAN ATTACK ON UAE SINCE 8 APR CEASEFIRE. IRGC Navy expanded control zone to include UAE ports of Fujairah and Khorfakkan plus Umm Al Quwain coast. UAE on alert for further missile attacks (Arab News emergency alert). Watch: UAE airspace status, Dubai/Abu Dhabi airport operations, formal UAE government framing." },
-      "Russia":       { level: "Exercise Caution", notes: "Mon 27 Apr Putin-Araghchi concluded with Russia pledging support for Iran." },
-      "Oman":         { level: "High Caution", notes: "Muscat functional. Omani back-channel role folded into Pakistan-mediated proposal Trump rejected Wed." },
-      "Egypt":        { level: "High Caution", notes: "Cairo/Alexandria operating. Wed 6 May 06:07 UTC MORNING: EGP 53.6200 (Pound Sterling Live / TradingEconomics Tue close, +0.17% from Tue PM 53.530); CBE re-assertion architecturally durable through full Mon-Tue cycle (kinetic re-escalation Mon → Tue AM verbal de-escalation by Hegseth → Tue evening Trump pause + Great Progress framing collapse). Cushion to 55 panic $1.38. Trump pause of Project Freedom + Great Progress framing (Truth Social 5-6 May) materially softens regional-risk surface; Brent collapse to $108.09 (-5.55% Tue) eases imported-fuel pressure. Cairo trip June risk-grade modestly downgraded; emergency-IMF-tranche timing eased. April CBE CPI + reserves prints due — early-May window open into Wed 6-7 May. HISTORICAL TUE EVENING: Tue 5 May 18:07 UTC EVENING: EGP 53.530 (Wise/xe.com Tue PM); CBE re-assertion durable through Mon + Tue full trading day; intraday high 53.805 consolidated back to 53.5x; cushion to 55 panic $1.47. Hegseth the-ceasefire-is-not-over (CNBC) modestly softens regional-risk surface; Brent $113.41 Tue PM keeps imported-fuel pressure elevated but eased from Mon $114.77. HISTORICAL MON EVENING: EGP 53.551 (Wise/xe.com Mon PM) — CBE re-assertion holding through Mon trading; cushion to 55 panic $1.45. Sisi NEAR STATE OF ECONOMIC EMERGENCY framing holds. PM Madbouly via Al Jazeera Mon update: energy import bill series sharpened to $1.2B Jan → $1.5B Feb → $2.5B March; Sunday WFH extended through May (PM Decree 982); fuel-oil burn ACTIVE; government considering increased fuel-oil imports for power generation amid LNG procurement difficulties. NEW Mon EVENING: kinetic re-escalation (Iran-UAE Fujairah attack, Project Freedom kinetic exchange, Brent +6.10% to $114.77, Trump reviewing new military options) compounds regional risk surface; blockade-and-fuel-burn period now stretches harder into June peak-demand window. Urban CPI 15.2% Mar; April print due — early-May window open. $3B emergency IMF loan still in considering phase." },
-      "Jordan":       { level: "High Caution", notes: "Stable but exposed to spillover." },
-      "Turkey":       { level: "Exercise Caution", notes: "Istanbul/Ankara operational. Mediator role preserves access." }
+    "Iran": {
+      "level": "Do Not Travel",
+      "notes": "FCDO last changed 13 Aug 2026: advises against ALL travel to Iran. Iranian authorities control air, sea and land routes; airspace may close at short notice. UK embassy staff withdrawal text removed 13 Aug."
     },
-    summary: "7 Oct: the war is ongoing and re-escalating, Hormuz is contested and the Red Sea remains dangerous. Treat Gulf, Levant and Iraq travel as elevated-risk and insurance-mandatory. NOTE: the per-country detail below dates from the spring and is pending a sourced refresh.",
-    updated: "2026-10-08T06:40:00.000Z"
+    "Kuwait": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 20 Aug 2026: LIFTED its earlier all-but-essential-travel advice, so the previous 'Do Not Travel / airport closed' entry was out of date. Airport operates through Terminals 4 and 5 only (Terminal 1 closed), reduced schedules. Iran has struck Kuwait since 8 Jul. Confirm flights with your airline."
+    },
+    "Israel": {
+      "level": "Reconsider Travel",
+      "notes": "FCDO last changed 22 Jul 2026: advises against all travel to Gaza, parts of the West Bank and the far north / Golan; all but essential to most of the rest of the West Bank. Rocket and drone risk throughout; Ben Gurion may be disrupted; borders may close if tensions escalate."
+    },
+    "Lebanon": {
+      "level": "Reconsider Travel",
+      "notes": "FCDO last changed 10 Aug 2026: narrowed the areas under all-travel / all-but-essential advice but kept them for others. Cessation of hostilities announced June 2026; airstrikes continue, mainly in the south. Beirut airport open; check security first."
+    },
+    "Iraq": {
+      "level": "Reconsider Travel",
+      "notes": "FCDO last changed 22 Jul 2026: against all travel to Kirkuk, Ninawa, Salah al-Din, Diyala (except Baqubah), parts of Anbar and border strips; against all but essential travel to most of Baghdad, the south and the Kurdistan Region. Iran has struck Iraq and Kurdistan since 8 Jul."
+    },
+    "Bahrain": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 8 Oct 2026 (dual nationality, local laws, air quality; no change to warnings). No formal warning level. Iran has struck Bahrain since 8 Jul; US Embassy Manama warned on 20 Jul that central Manama may be targeted. In April airspace and the King Fahd Causeway closed together."
+    },
+    "Qatar": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 19 Aug 2026 (medication permits only). No formal warning level; Iran has struck Qatar since 8 Jul. Airports and airspace could close at short notice."
+    },
+    "Saudi Arabia": {
+      "level": "Reconsider Travel",
+      "notes": "FCDO updated 10 Oct 2026 after a serious incident at King Khalid International Airport, Riyadh (about 15:00 local): avoid the airport until secure. Against all travel within 10km of the Yemen border; all but essential to Aseer, Riyadh, Najran, Jizan provinces and Taif. Houthi missile and drone attacks on Saudi targets since 13 Jul; further airport attacks considered very likely."
+    },
+    "UAE": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 24 Jul 2026. No formal warning level; regional-tensions notice only. Possible cancellations and short-notice airport or airspace closures. UAE has been a repeated Iranian target since February (UAE MoD tally 537 ballistic, 2,256 drones, 26 cruise by 9 Apr)."
+    },
+    "Russia": {
+      "level": "Do Not Travel",
+      "notes": "FCDO last changed 18 Sep 2026: advises against ALL travel to Russia; drone attacks can cause sudden airspace and airport restrictions."
+    },
+    "Oman": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 22 Jul 2026. No formal warning level; Iran has struck locations in Oman since 8 Jul. Expect possible cancellations and airspace closures."
+    },
+    "Egypt": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 4 Aug 2026 (checked 11 Oct; nothing newer, so it does not reflect events since). Against all travel to North Sinai and within 20km of the Libya border; all but essential to Ismailiyah east of the Canal, northern South Sinai, parts of the Western Desert. Cairo not restricted. 29 Jul drone strike damaged two ships off Damietta."
+    },
+    "Jordan": {
+      "level": "High Caution",
+      "notes": "FCDO last changed 10 Sep 2026: added Iranian missile strikes on Jordan; renewed attacks and interceptions around Aqaba in early September. Against all travel within 3km of the Syria border."
+    },
+    "Turkey": {
+      "level": "Exercise Caution",
+      "notes": "FCDO last changed 21 Sep 2026 (LGBT+ travellers only). Against all travel within 10km of the Syria border. High wildfire risk April to October."
+    }
+    },
+    summary: "11 Oct refresh from FCDO pages. Levels are OUR mapping of FCDO advice for the main business cities, not an official rating: Do Not Travel = FCDO advises against all travel to the country; Reconsider Travel = FCDO advises against all or all-but-essential travel to large parts or the main city; High Caution = no formal warning level but active regional-conflict warnings; Exercise Caution = routine. Moves vs the spring entries: Kuwait, Bahrain and Israel are DOWN a step because FCDO has lifted or never applied country-wide advice; Saudi Arabia is the live escalation (Riyadh airport incident 10 Oct, Houthi campaign since 13 Jul). Most FCDO pages were last changed July to August, so they lag the October escalation. Insurance may be invalidated if you travel against FCDO advice.",
+    updated: "2026-10-11T21:55:00.000Z"
   }
 
 });
