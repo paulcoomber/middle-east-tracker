@@ -1718,6 +1718,7 @@ table{
   <div class="card">
     <div class="card-title">Honest Assessment</div>
     <div style="font-size:11px;color:var(--amber);line-height:1.8;font-style:italic" id="eg-honest"></div>
+    <div id="eg-noise" style="margin-top:14px;display:none"></div>
   </div>
   <div class="card" id="eg-investment-card" style="display:none">
     <div class="card-title">Egypt — Invest / Relocate Technical Resources?</div>
@@ -2928,6 +2929,29 @@ Object.assign(window.GULF_RISK_DATA, {
     egp_usd: 53.07,
     egp_panic_threshold: 55,
     status: "STRESS - managed slide, now under added external pressure. 15 Oct: USD/EGP 53.07 (TradingEconomics, 14 Oct), up from 52.30 on 1 Oct (CBE closing) and against 47.9 at end-Feb, a March high of 54.4 and our 55 panic line; programme rate fixed 47.81 so the market gap persists. Headline NIR a record $57.35bn end-September (CBE, 7 Oct, single-outlet corroboration) but gold-flattered - operative cash is far lower and the headline-vs-operative thesis holds (analyst-adjusted ~$34bn, NFA negative underneath). Urban inflation 13.9% Sept (seven-month low) but monthly urban CPI +1.3% on vegetables; core 14.9% Aug. CBE held 19/20% on 24 Sep. The pound has turned, the early-warning signal we watch above all others, heading into the December IMF cliff.",
+    early_noise: {
+      what_we_watch: "The shape of the signal, not a single event: brief outages dismissed as technical faults, a rising low-level hum of them, no complete failure. Egyptian press and official explanations are the primary source; social media is not searchable here, so absence of reports is NOT evidence of absence.",
+      current_read: "LOW-WATCH (15 Oct, judgement). Summer pattern is documented; no outage reports dated September or October were found in a sweep of English and Arabic press. Gap logged, not a clean bill.",
+      strengthens_if: [
+        "outages reported outside the heat peak (Oct-Mar), where heat cannot be the stated cause",
+        "the same 'technical fault' explanation repeated across areas or weeks",
+        "the same district hit more than once",
+        "spread to governorates not previously named",
+        "language shifts from fault to 'rationalising consumption' or load management",
+        "gas curtailment to fertilizer, cement or steel reported",
+        "Leviathan flows to Egypt halted again, or LNG cargo tender slippage"
+      ],
+      items: [
+        { date: "2026-06", what: "Oil Ministry raised LNG allocations to heavy industry from one cargo to five a month (about 16 bcf), over 65% to fertilizers, petrochemicals and steel - a call on the same LNG that backs the grid.", source: "EnterpriseAM, 30 Sep explainer", tag: "reported" },
+        { date: "2026-07-23", what: "Prolonged outages in Qalyubia, Red Sea, Port Said, Sharqia and Minya; residents report no explanation or restoration times; officials cite heat and grid strain, no fuel link stated.", source: "Al-Masry Al-Youm via Egypt Independent", tag: "reported" },
+        { date: "2026-07-27", what: "Analysis headlined 'Egypt's Summer Blackouts Return as Energy Stress Reappears': prolonged outages in several governorates. Full text paywalled; causes not visible.", source: "North-Africa.com", tag: "analysis, partial" },
+        { date: "2026-08-01", what: "Household electricity tariffs up about 12% on average, first bracket unchanged; An-Nahar puts 51-100 kWh up about 22% and 101-200 kWh up about 21%. Ministry blames a 'severe and unprecedented' global energy crisis. Subsidy still about EGP 100bn a year.", source: "Ahram Online 1 Aug; An-Nahar 3 Aug (page metadata shows a conflicting year)", tag: "reported" },
+        { date: "2026-08", what: "Peak demand passed 40 GW, about 2 GW above last year's peak.", source: "EnterpriseAM 30 Sep", tag: "reported" },
+        { date: "2026-09-30", what: "EnterpriseAM ran two explainers the same day: why a gas shortage becomes a blackout, and how Egypt decides who loses power when gas runs short. Neither reports a current shortfall. Judgement: a business paper pre-positioning the question is soft evidence.", source: "EnterpriseAM", tag: "judgement" },
+        { date: "2026-10-15", what: "SWEEP GAP: no Sept or Oct press reports of outages, butane or petrol queues, or bread price moves found. Fuel pricing committee due early October; outcome not found. Leviathan flows back to about 1.1 bcf/d since April (Bloomberg, unnamed source) but were halted once by this war.", source: "GERM sweep 15 Oct", tag: "gap" }
+      ],
+      last_swept: "2026-10-15"
+    },
     squeeze_note_15oct: "15 Oct, FACT: Brent ~$104-105 (TradingEconomics/CBS) against $98 at end-September; Houthis say attacks on Saudi airports and oil sites will continue (CBS, 14 Oct); at least 10 vessels attacked in Hormuz since Sunday and the container ship GFS Pride reported sunk (Vanguard/AFP); Suez recovery to 14 Oct was real - Aug 2026 revenue $567.1m vs $326m a year earlier, FY25/26 $4.67bn, still under half the 2023 peak (Suez Canal Authority, Rio Times 5 Oct); Madbouly named Red Sea/Bab el-Mandeb tensions and Hormuz as live problems on 4 Oct. NOT YET SEEN: any Egypt-specific data dated after 13 Oct (no Suez transit drop, no flow data, no Gulf deposit news). READ (judgement): the Saudi-Houthi escalation squeezes Egypt through five channels - the fuel import bill, Bab el-Mandeb risk to the Suez recovery (and to the SUMED bypass pitch), risk-off exits from pound carry, Gulf backers under attack and less able to roll deposits or write fresh cheques, and a smaller Gulf remittance/labour effect. It raises the cost of floating without a successor IMF programme while the final review ($2.3bn) is the only money on the table. Rupture weight held at 20-25%, Dec-Feb; move to the top of the range if EGP breaks 54.4 or weekly Suez transits visibly fall.",
     imf_status: "11 Oct: Cairo has now said it will not seek a successor. PM Madbouly (reported ~4 Oct, CNN Business Arabic): Egypt does not need a new IMF programme and can now grow without one; home-grown plan to 2045 due end-October. IMF (Kozack, 1 Oct): final EFF review plus a third RSF review still due Oct-Dec, ~$2.3bn, ~$7.3bn already paid. EFF expiry carried as 15 Dec; Fitch (8 Oct) expects the arrangements to end in November - date unreconciled. IMF said in July state-role/SOE reform progressed more slowly than anticipated; asset sales ~$520m; Sept PMI 47.2. READ (judgement): declining a successor is a signal of standing alone, which avoids a published reform record and external validation; it rests on reversible portfolio inflows, gold-flattered reserves and still needing the final review to release the $2.3bn. First tell will be late and look sudden (pound slip, Gulf rollover, weak bond auction). The 21 Sep IMF resilience line is a stakeholder praising its own programme.",
     gas_import_cost_monthly_bn: 2.5,
@@ -4483,6 +4507,22 @@ function render() {
 
   document.getElementById('eg-iran-destroyed').textContent = eg.iran_destroyed_scenario || '';
   document.getElementById('eg-honest').textContent = eg.honest_assessment || '';
+
+  (function(){
+    var box = document.getElementById('eg-noise'); if (!box) return;
+    var parts = [];
+    if (eg.squeeze_note_15oct) parts.push('<div style="font-size:11px;line-height:1.7;margin-bottom:10px"><b style="color:var(--amber)">SQUEEZE (15 Oct)</b><br>'+esc(eg.squeeze_note_15oct)+'</div>');
+    var n = eg.early_noise;
+    if (n) {
+      var h = '<div style="font-size:11px;line-height:1.7"><b style="color:var(--amber)">EARLY NOISE</b> <span style="color:var(--muted)">(swept '+esc(n.last_swept||'')+')</span><br>'+esc(n.current_read||'')+'<br><i>'+esc(n.what_we_watch||'')+'</i></div>';
+      h += (n.items||[]).map(function(it){
+        return '<div class="wl-item"><div class="wl-status wl-Watch">'+esc(it.date||'')+'</div><div class="wl-body"><div class="wl-notes">'+esc(it.what||'')+' <span style="color:var(--muted)">['+esc(it.tag||'')+'; '+esc(it.source||'')+']</span></div></div></div>';
+      }).join('');
+      h += '<div style="font-size:11px;line-height:1.7;margin-top:8px"><b>Strengthens if:</b> '+(n.strengthens_if||[]).map(esc).join('; ')+'</div>';
+      parts.push(h);
+    }
+    if (parts.length) { box.innerHTML = parts.join(''); box.style.display = ''; }
+  })();
 
   var inv = eg.investment_assessment;
   if (inv) {
