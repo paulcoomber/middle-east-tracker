@@ -2078,6 +2078,18 @@ window.GERM_FRESHNESS={"metrics.egp_black_market":{"as_of":"2026-10-16T06:15:46.
         + '</div>';
     }
 
+    function flankCard(title,r,maxItems){
+      if(!r)return '';
+      var o='<div class="card card-high"><div class="card-title">'+title+(r.updated?' · '+esc(ts(r.updated)):'')+'</div>'
+        +'<div style="font-size:12px;line-height:1.6;color:var(--amber)"><b>'+esc(r.current_read||'')+'</b></div>';
+      (r.items||[]).slice(0,maxItems).forEach(function(it){o+='<div style="font-size:12px;line-height:1.5;margin-top:8px"><b>'+esc(it.date||'')+'</b> '+esc(it.what||'')+' <span style="color:var(--muted)">['+esc(it.source||'')+']</span></div>';});
+      var tw=(r.tripwires||[]);
+      if(tw.length){o+='<div style="font-size:11px;margin-top:10px"><b>Tripwires</b></div>';tw.forEach(function(t){o+='<div style="font-size:11px;line-height:1.5;margin-top:4px"><b>'+esc(t.status||'')+'</b> '+esc(t.metric||'')+': <span style="color:var(--muted)">'+esc(t.last_value||'')+'</span></div>';});}
+      return o+'</div>';
+    }
+    html += flankCard('Egypt street pressure',D.egypt_street,5);
+    html += flankCard('Russia / NATO flank',D.russia_flank,3);
+
     html += '<div class="footer">'
       + '<a class="desk" href="index.html?desktop=1">Open full desktop view</a>'
       + '<div>Source: paulcoomber.github.io/middle-east-tracker</div>'
